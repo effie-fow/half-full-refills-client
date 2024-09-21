@@ -70,7 +70,7 @@ Know of a local shop that aligns with our values? Fill in our short nomination f
     - Once selected, 'find shops' button brings up list of shops with icons matching your search
     - **Refill Page Plan**
 
-    ![A diagram dispalying the user journey and questions to be asked on the shops landing page](./assets/images/references/shops-page-plan.png)
+    ![A diagram dispalying the user journey and questions to be asked on the shops landing page](./src/assets/images/references/shops-page-plan.png)
 
 - Shop (Individual)
   - Each shop can have it's own page with full details including items available for refill, other information, map, address, link to website,
@@ -82,20 +82,20 @@ Know of a local shop that aligns with our values? Fill in our short nomination f
   - Form page where logged in users can fill in essential details about the shop they're nominating
   - **Nomination Form Plan**
 
-    ![A diagram displaying the user journey and questions to be asked in the nomination form](./assets/images/references/nomination-form-plan.png)
+    ![A diagram displaying the user journey and questions to be asked in the nomination form](./src/assets/images/references/nomination-form-plan.png)
 
 - Log-in
 - Create account
 
 ### Mockups
 
-![A landscape image of three desktop page mockups alongside each other. From left to right, the home page, the refills (by product) and refills (by search) page](./assets/images/references/mockups-desktop-home-refills.png)
+![A landscape image of three desktop page mockups alongside each other. From left to right, the home page, the refills (by product) and refills (by search) page](./src/assets/images/references/mockups-desktop-home-refills.png)
 
 ### Data
 
 There will be three core data tables with varying relationships, two intermediate tables and a user table.
 
-![A DrawSQL diagram displaying tables of the database, and the relationships between them (written in plain-text below)](./assets/images/references/draw-sql-diagram.png)
+![A DrawSQL diagram displaying tables of the database, and the relationships between them (written in plain-text below)](./src/assets/images/references/draw-sql-diagram.png)
 
 1. **shops** - includes key shop details;
 
@@ -159,7 +159,7 @@ There will be three core data tables with varying relationships, two intermediat
 
    ***
 
-   ![A screenshot of a Google Sheet displaying examples of how the tables will interact with eachother using mock data](./assets/images/references/spreadsheet-data-example.png)
+   ![A screenshot of a Google Sheet displaying examples of how the tables will interact with eachother using mock data](./src/assets/images/references/spreadsheet-data-example.png)
 
 ### Endpoints
 
