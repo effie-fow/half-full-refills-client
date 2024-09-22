@@ -130,7 +130,7 @@ export const NominationsFormExistingShop = () => {
   }
 
   return (
-    <form className="existing-shops-form" onSubmit={handleSubmit}>
+    <form noValidate className="existing-shops-form" onSubmit={handleSubmit}>
       <Dropdown
         options={dropDownShops}
         className="existing-shops-form__dropdown"

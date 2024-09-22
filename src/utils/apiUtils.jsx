@@ -20,6 +20,67 @@ export const getActiveShops = async () => {
   }
 };
 
+export const getShopsByCity = async (city) => {
+  try {
+    const response = await axios.get(
+      `${apiUrl}/shops?is_active=1&city=${city}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getShopsByItems = async (items, strictSearch) => {
+  const matchType = strictSearch ? "exact" : "partial";
+
+  if (typeof items !== "object") {
+    console.error("Items query must be an array of items.");
+    return;
+  }
+
+  if (!items.length) {
+    console.error("There are no items to query by");
+    return;
+  }
+
+  const formattedItems = items.join(",");
+
+  try {
+    const response = await axios.get(
+      `${apiUrl}/shops?is_active=1&items=${formattedItems}&match_type=${matchType}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getShopsByCityAndItems = async (city, items, strictSearch) => {
+  const matchType = strictSearch ? "exact" : "partial";
+
+  if (typeof items !== "object") {
+    console.error("Items query must be an array of items.");
+    return;
+  }
+
+  if (!items.length) {
+    console.error("There are no items to query by");
+    return;
+  }
+
+  const formattedItems = items.join(",");
+
+  try {
+    const response = await axios.get(
+      `${apiUrl}/shops?is_active=1&city=${city}&items=${formattedItems}&match_type=${matchType}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const getSingleShop = async (id) => {
   try {
     const response = await axios.get(`${apiUrl}/shops/${id}`);
