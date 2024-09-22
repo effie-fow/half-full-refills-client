@@ -1,0 +1,12 @@
+@use "../../styles/partials/layout/display";
+@use "../../styles/partials/layout/padding";
+
+.info-card {
+  &__container {
+    @include padding.top-bottom(1rem, 1rem);
+  }
+
+  &__items-list {
+    @include display.flexbox(row, start, center, wrap, 0.5rem);
+  }
+}

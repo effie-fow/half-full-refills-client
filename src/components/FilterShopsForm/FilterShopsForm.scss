@@ -1,0 +1,10 @@
+@use "../../styles/partials/layout/display";
+
+.filter-shops-form {
+  &__checkboxes {
+    border: none;
+    padding: 0;
+    margin: 0;
+    @include display.flexbox(row, start, center, wrap, 0.5rem);
+  }
+}

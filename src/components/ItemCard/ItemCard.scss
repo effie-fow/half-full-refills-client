@@ -1,5 +1,19 @@
+@use "../../styles/partials/base/color";
+@use "../../styles/partials/layout/display";
+
 .item-card {
+  width: 13rem;
+  @include display.flexbox(row, start, center, wrap, 0.5rem);
+
+  &__icon-container {
+    border-radius: 50%;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: color.$light;
+    @include display.flexbox(row, center, center, wrap);
+  }
+
   &__icon {
-    height: 1rem;
+    height: 70%;
   }
 }

@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import "./FilterShopsForm.scss";
 import {
   getAllItems,
   getShopsByCity,
   getShopsByCityAndItems,
   getShopsByItems,
 } from "../../utils/apiUtils";
+import { useEffect, useState } from "react";
 import { Button } from "../Button/Button";
 import { TextInput } from "../TextInput/TextInput";
-import "./FilterShopsForm.scss";
 import { ItemCheckbox } from "../ItemCheckbox/ItemCheckbox";
 
 export const FilterShopsForm = ({ setShops, setShopSearchMessage }) => {
@@ -19,7 +19,7 @@ export const FilterShopsForm = ({ setShops, setShopSearchMessage }) => {
     const searchedCity = event.target[0].value;
 
     const selectedItems = [];
-    const strictSearch = event.target[19].checked;
+    const strictSearch = event.target[20].checked;
 
     for (let i = 1; i < items.length + 1; i++) {
       if (event.target[i].checked) {
@@ -133,9 +133,11 @@ export const FilterShopsForm = ({ setShops, setShopSearchMessage }) => {
         devLabel={"city"}
         placeholder={"Write a city's name"}
       />
-      {items.map((item) => {
-        return <ItemCheckbox key={item.id} item={item} />;
-      })}
+      <fieldset className="filter-shops-form__checkboxes">
+        {items.map((item) => {
+          return <ItemCheckbox key={item.id} item={item} />;
+        })}
+      </fieldset>
       <label
         htmlFor="match_type"
         className="filter-shops-form__strict-search-label"

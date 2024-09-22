@@ -1,0 +1,25 @@
+@use "../../styles/partials/base/color";
+@use "../../styles/partials/layout/display";
+
+.custom-checkbox {
+  @include display.flexbox(row, start, center, wrap, 0.5rem);
+
+  &__icon-container {
+    border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
+    background-color: color.$dark;
+    box-shadow: inset 0rem 0rem 0.5rem 0.05rem color.$dark-hover;
+    transition: 0.5s ease-out;
+    @include display.flexbox(row, center, center, wrap);
+
+    &--light {
+      background-color: color.$light;
+      box-shadow: inset 0rem 0rem 0.3rem 0.04rem color.$light-hover;
+    }
+  }
+
+  &__icon {
+    height: 70%;
+  }
+}

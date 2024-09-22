@@ -1,0 +1,25 @@
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/base/color";
+
+.item-checkbox {
+  position: relative;
+  border: 0.01rem solid color.$off-white;
+  width: 11rem;
+  padding: 0.25rem 0.2rem;
+  font-size: 0.9rem;
+  border-radius: 0.3rem;
+  @include padding.top-bottom(0.25rem, 0.25rem);
+
+  &__label {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+}
