@@ -1,10 +1,19 @@
 import axios from "axios";
 
-const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3030";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const getNominatedShops = async () => {
   try {
     const response = await axios.get(`${apiUrl}/shops?is_active=0`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getActiveShops = async () => {
+  try {
+    const response = await axios.get(`${apiUrl}/shops?is_active=1`);
     return response.data;
   } catch (error) {
     console.error(error);

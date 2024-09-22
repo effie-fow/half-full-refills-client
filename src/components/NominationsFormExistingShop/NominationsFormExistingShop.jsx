@@ -106,7 +106,7 @@ export const NominationsFormExistingShop = () => {
 
       if (shopDetails.is_active) {
         setShopActivated(`Yours was the 100th nomination! ${nominatedShop.name} is now active on
-        our website with details on ${nominatedShop.items.length} of its refillables and key details, thank to you!`);
+        our website with details on ${nominatedShop.items.length} of its refillables and key details, thanks to you!`);
         setTimeout(() => {
           setShopActivated("");
         }, 6000);

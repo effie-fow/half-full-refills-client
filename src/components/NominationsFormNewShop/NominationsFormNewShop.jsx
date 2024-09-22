@@ -10,6 +10,7 @@ import {
   postNominationItems,
   postNewShop,
 } from "../../utils/apiUtils";
+import { getCoordinates } from "../../utils/mapBoxApi";
 
 export const NominationsFormNewShop = () => {
   const [nominatedShops, setNominatedShops] = useState(null);
@@ -61,6 +62,16 @@ export const NominationsFormNewShop = () => {
     };
 
     try {
+      const { street_number, street_name, city } = newShop;
+
+      const coordinates = await getCoordinates(
+        street_number,
+        street_name,
+        city
+      );
+
+      newShop.coordinates = JSON.stringify(coordinates);
+
       const newShopResponse = await postNewShop(newShop);
       const newShopId = newShopResponse.data.id;
       const selectedItems = [];
