@@ -1,8 +1,13 @@
 @use "../../styles/partials/base/color";
+@use "../../styles/partials/base/breakpoints";
 @use "../../styles/partials/layout/display";
 
 .custom-checkbox {
   @include display.flexbox(row, start, center, wrap, 0.5rem);
+
+  @include breakpoints.small-phone {
+    width: 100%;
+  }
 
   &__icon-container {
     border-radius: 50%;
@@ -10,8 +15,13 @@
     width: 2rem;
     background-color: color.$dark;
     box-shadow: inset 0rem 0rem 0.5rem 0.05rem color.$dark-hover;
-    transition: 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
     @include display.flexbox(row, center, center, wrap);
+
+    @include breakpoints.small-phone {
+      height: 3rem;
+      width: 3rem;
+    }
 
     &--light {
       background-color: color.$light;

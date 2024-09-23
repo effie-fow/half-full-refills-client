@@ -1,0 +1,25 @@
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/layout/form-features";
+
+.existing-shops-form {
+  &__dropdown {
+    width: 100%;
+    @include padding.top-bottom(1rem, 1rem);
+  }
+
+  &__items {
+    @include form-features.fieldset-reset;
+  }
+
+  &__checkboxes-container {
+    @include form-features.checkbox-container;
+  }
+
+  &__button-container {
+    @include form-features.button-container;
+  }
+
+  &__form-popup {
+    @include form-features.pop-up-message;
+  }
+}

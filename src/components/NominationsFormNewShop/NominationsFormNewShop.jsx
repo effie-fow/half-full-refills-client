@@ -11,6 +11,9 @@ import {
   postNewShop,
 } from "../../utils/apiUtils";
 import { getCoordinates } from "../../utils/mapBoxApi";
+import { CheckboxInstructions } from "../CheckboxInstructions/CheckboxInstructions";
+import { FormFieldsInstructions } from "../FormFieldsInstructions/FormFieldsInstructions";
+import { Divider } from "../Divider/Divider";
 
 export const NominationsFormNewShop = () => {
   const [nominatedShops, setNominatedShops] = useState(null);
@@ -48,6 +51,7 @@ export const NominationsFormNewShop = () => {
       if (!input.value) {
         setEmptyInputMessage(generateEmptyInputMessage(input));
         setMissingInput(true);
+        setTimeout(() => setMissingInput(false), 3000);
         return;
       }
     }
@@ -83,7 +87,7 @@ export const NominationsFormNewShop = () => {
       }
 
       if (!selectedItems.length) {
-        setEmptyInputMessage("Don't forget to let us know the shop sells!");
+        setEmptyInputMessage("Don't forget to add items!");
         setMissingInput(true);
         return;
       }
@@ -113,24 +117,27 @@ export const NominationsFormNewShop = () => {
   return (
     <form className="new-shops-form" onSubmit={handleSubmit}>
       <fieldset className="new-shops-form__shop-details">
+        <FormFieldsInstructions />
         <TextInput
           userLabel={"Shop Name"}
           devLabel={"name"}
           placeholder={"Add the shop's name"}
         />
-        <label
-          htmlFor="street_number"
-          className="new-shops-form__street-number-label"
-        >
-          Street Number:{" "}
-        </label>
-        <input
-          type="number"
-          name="street_number"
-          id="street_number"
-          className="new-shops-form__street-number-input"
-          placeholder="Add the street number"
-        />
+        <div className="new-shops-form__street-number-container">
+          <label
+            htmlFor="street_number"
+            className="new-shops-form__street-number-label"
+          >
+            Street Number:{" "}
+          </label>
+          <input
+            type="number"
+            name="street_number"
+            id="street_number"
+            className="new-shops-form__street-number-input"
+            placeholder="Add the street number"
+          />
+        </div>
         <TextInput
           userLabel={"Street Name"}
           devLabel={"street_name"}
@@ -139,7 +146,7 @@ export const NominationsFormNewShop = () => {
         <TextInput
           userLabel={"City"}
           devLabel={"city"}
-          placeholder={"Add the name of the city the shop is in"}
+          placeholder={"Add the shop's city"}
         />
         <TextInput
           userLabel={"Postcode"}
@@ -147,11 +154,21 @@ export const NominationsFormNewShop = () => {
           placeholder={"Add the shop's postcode"}
         />
       </fieldset>
-      {items.map((item) => {
-        return <ItemCheckbox key={item.id} item={item} />;
-      })}
-      <Button buttonText="Nominate" />
-      {missingInput ? <p>{emptyInputMessage}</p> : <></>}
+      <Divider />
+      <fieldset className="new-shops-form__items">
+        <CheckboxInstructions />
+        <div className="new-shops-form__checkboxes-container">
+          {items.map((item) => {
+            return <ItemCheckbox key={item.id} item={item} />;
+          })}
+        </div>
+      </fieldset>
+      <div className="new-shops-form__button-container">
+        <span className="new-shops-form__form-popup">
+          {missingInput ? `${emptyInputMessage}` : ""}
+        </span>
+        <Button buttonText="Nominate" />
+      </div>
     </form>
   );
 };

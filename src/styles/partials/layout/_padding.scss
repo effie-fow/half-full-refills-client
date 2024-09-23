@@ -1,4 +1,26 @@
+@use "../base/breakpoints";
+
 @mixin top-bottom($top, $bottom) {
   padding-top: $top;
   padding-bottom: $bottom;
+}
+
+@mixin sides {
+  padding-right: 1rem;
+  padding-left: 1rem;
+
+  @include breakpoints.large-phone {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  @include breakpoints.tablet {
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
+
+  @include breakpoints.desktop {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }

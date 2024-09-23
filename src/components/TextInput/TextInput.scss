@@ -1,0 +1,15 @@
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/layout/display";
+@use "../../styles/partials/base/color";
+@use "../../styles/partials/base/breakpoints";
+@use "../../styles/partials/layout/form-features";
+
+.text-input {
+  &__container {
+    @include form-features.input-container;
+  }
+
+  &__input {
+    @include form-features.input-default;
+  }
+}

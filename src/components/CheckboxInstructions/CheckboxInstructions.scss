@@ -1,0 +1,17 @@
+@use "../../styles/partials/layout/display";
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/base/typography";
+
+.checkbox-instructions {
+  @include display.flexbox(column, center, start, wrap);
+
+  &__heading {
+    @include typography.form-question;
+  }
+
+  &__description {
+    line-height: 1.4;
+    @include padding.top-bottom(0.5rem, 0.75rem);
+    @include typography.form-instructions;
+  }
+}

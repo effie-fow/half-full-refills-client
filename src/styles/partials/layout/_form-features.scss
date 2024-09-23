@@ -1,0 +1,58 @@
+@use "./display";
+@use "./padding";
+@use "../base/color";
+@use "../base/breakpoints";
+
+@mixin checkbox-container {
+  width: 100%;
+  @include display.flexbox(row, start, center, wrap);
+}
+
+@mixin button-container {
+  width: 100%;
+  @include padding.top-bottom(1.5rem, 1.5rem);
+  @include display.flexbox(row, space-between, center, wrap);
+}
+
+@mixin pop-up-message {
+  color: color.$accent;
+  font-weight: 300;
+  font-size: 1rem;
+  text-align: center;
+  min-width: 1rem;
+}
+
+@mixin fieldset-reset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin input-container {
+  border-top: 0.01rem solid color.$off-white;
+  border-bottom: 0.01rem solid color.$off-white;
+  width: 100%;
+  max-width: 22rem;
+  @include padding.top-bottom(0.75rem, 0.75rem);
+  @include display.flexbox(row, space-between, center, wrap);
+
+  @include breakpoints.small-phone {
+    @include display.flexbox(column, center, start, wrap);
+  }
+}
+
+@mixin input-default {
+  border: 1px solid color.$grey;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: "Hind Siliguri";
+  color: color.$dark;
+  font-weight: 200;
+  width: 14rem;
+  padding: 0 0.5rem;
+
+  &:focus {
+    outline: none;
+    border: 1px solid green;
+  }
+}

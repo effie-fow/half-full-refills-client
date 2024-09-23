@@ -34,7 +34,7 @@ export const ShopsBrowsePage = () => {
       />
       <p onClick={fetchShops}>Refresh shops</p>
       {shopSearchMessage ? <p>{shopSearchMessage}</p> : <></>}
-      {/* <MapBox shops={shops} /> */}
+      <MapBox shops={shops} />
     </main>
   );
 };

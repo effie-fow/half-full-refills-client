@@ -12,6 +12,8 @@ import {
 } from "../../utils/apiUtils";
 // CUSTOMISE REACT DROPDOWN LATER AND REMOVE THIS -------
 import "react-dropdown/style.css";
+import { Navigate } from "react-router-dom";
+import { CheckboxInstructions } from "../CheckboxInstructions/CheckboxInstructions";
 // ------------------------------------------------------
 
 export const NominationsFormExistingShop = () => {
@@ -82,13 +84,13 @@ export const NominationsFormExistingShop = () => {
 
     if (!shopId) {
       setEmptyFieldMessage("Please select a shop to nominate.");
+      setTimeout(() => setEmptyFieldMessage(""), 3000);
       return;
     }
 
     if (!nominationData.items.length) {
-      setEmptyFieldMessage(
-        "Please tell us which items you're nominated shop stocks."
-      );
+      setEmptyFieldMessage("Don't forget to add items!");
+      setTimeout(() => setEmptyFieldMessage(""), 3000);
       return;
     }
 
@@ -130,23 +132,35 @@ export const NominationsFormExistingShop = () => {
   }
 
   return (
-    <form noValidate className="existing-shops-form" onSubmit={handleSubmit}>
-      <Dropdown
-        options={dropDownShops}
-        className="existing-shops-form__dropdown"
-        placeholder="Select a Shop"
-        value={currentShop ? currentShop : ""}
-        onChange={(event) => {
-          setCurrentShop(event.value);
-        }}
-      />
-      {items.map((item) => {
-        return <ItemCheckbox key={item.id} item={item} />;
-      })}
-      <Button buttonText="Nominate" />
-      {shopActivated ? <p>{shopActivated}</p> : <></>}
-      {thankYouMessage ? <p>{thankYouMessage}</p> : <></>}
-      {emptyFieldMessage ? <p>{emptyFieldMessage}</p> : <></>}
-    </form>
+    <>
+      <form noValidate className="existing-shops-form" onSubmit={handleSubmit}>
+        <Dropdown
+          options={dropDownShops}
+          className="existing-shops-form__dropdown"
+          placeholder="Select a Shop"
+          value={currentShop ? currentShop : ""}
+          onChange={(event) => {
+            setCurrentShop(event.value);
+          }}
+        />
+        <fieldset className="existing-shops-form__items">
+          <CheckboxInstructions />
+          <div className="existing-shops-form__checkboxes-container">
+            {items.map((item) => {
+              return <ItemCheckbox key={item.id} item={item} />;
+            })}
+          </div>
+        </fieldset>
+        <div className="existing-shops-form__button-container">
+          <span className="existing-shops-form__form-popup">
+            {shopActivated ? `${shopActivated}` : " "}
+            {thankYouMessage ? `${thankYouMessage}` : ""}
+            {emptyFieldMessage ? `${emptyFieldMessage}` : ""}
+          </span>
+          <Button buttonText="Nominate" />
+        </div>
+        {thankYouMessage ? <Navigate to="/shops" /> : <></>}
+      </form>
+    </>
   );
 };

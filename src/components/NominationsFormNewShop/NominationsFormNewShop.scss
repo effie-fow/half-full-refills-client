@@ -1,0 +1,34 @@
+@use "../../styles/partials/layout/form-features";
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/base/color";
+
+.new-shops-form {
+  &__shop-details {
+    @include form-features.fieldset-reset;
+    @include padding.top-bottom(2rem, 1rem);
+  }
+
+  &__street-number-container {
+    @include form-features.input-container;
+  }
+
+  &__street-number-input {
+    @include form-features.input-default;
+  }
+
+  &__items {
+    @include form-features.fieldset-reset;
+  }
+
+  &__checkboxes-container {
+    @include form-features.checkbox-container;
+  }
+
+  &__button-container {
+    @include form-features.button-container;
+  }
+
+  &__form-popup {
+    @include form-features.pop-up-message;
+  }
+}

@@ -1,3 +1,5 @@
+@use "./color";
+
 @font-face {
   font-family: "Hind Siliguri";
   src: url(./assets/fonts/hind-silliguri/hind-siliguri-light.ttf)
@@ -37,3 +39,44 @@
   font-weight: 700;
   font-style: normal;
 }
+
+@mixin page-heading {
+  font-weight: 300;
+  color: color.$primary;
+  font-size: 2.5rem;
+}
+
+@mixin section-heading {
+  font-weight: 300;
+  color: color.$primary;
+  font-size: 1.75rem;
+  padding: 0.75rem 0;
+}
+
+@mixin tagline {
+  font-weight: 400;
+  padding: 0.5rem 0 0;
+}
+
+@mixin text-link {
+  font-weight: 400;
+  color: color.$accent;
+  text-decoration: none;
+
+  &:hover {
+    color: color.$accent-hover;
+    text-decoration: underline;
+  }
+}
+
+@mixin form-question {
+  font-weight: 500;
+}
+
+@mixin form-instructions {
+  font-weight: 200;
+  font-size: 0.85rem;
+  color: color.$grey;
+}
+
+$button-font-size: 0.9rem;

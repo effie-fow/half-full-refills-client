@@ -18,6 +18,10 @@
 
   &__logo {
     height: 2.75rem;
+
+    @include breakpoints.small-phone {
+      height: 1rem;
+    }
   }
 
   &__text-links {
@@ -35,6 +39,11 @@
     border-radius: 4px;
     width: 25%;
     @include display.flexbox(column, center, center, wrap);
+
+    @include breakpoints.small-phone {
+      font-size: 0.8rem;
+      padding: 0.75rem 0.25rem;
+    }
 
     &:hover {
       color: color.$light;

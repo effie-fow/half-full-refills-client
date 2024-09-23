@@ -1,23 +1,26 @@
 @use "../../styles/partials/base/color";
 @use "../../styles/partials/base/breakpoints";
 @use "../../styles/partials/layout/display";
+@use "../../styles/partials/layout/padding";
 
 .header {
   display: none;
+  @include padding.sides;
 
   @include breakpoints.large-phone {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
     background-color: color.$primary;
-    padding: 1.25rem 3rem;
     color: white;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
     @include display.flexbox(row, center, center, wrap);
 
     &__nav {
       width: 100%;
-      max-width: 70rem;
+      max-width: display.$desktop-max-width;
       @include display.flexbox(row, space-between, center, wrap);
     }
 

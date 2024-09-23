@@ -1,0 +1,19 @@
+@use "../../styles/partials/base/color";
+@use "../../styles/partials/base/typography";
+
+.button {
+  background-color: color.$accent;
+  box-shadow: inset 0rem 0rem 0.07rem 0.02rem color.$accent-shadow;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 0.2rem 0.9rem;
+  font-family: "Hind Siliguri";
+  font-weight: 300;
+  font-size: typography.$button-font-size;
+
+  &:hover {
+    background-color: color.$accent-hover;
+    cursor: pointer;
+  }
+}

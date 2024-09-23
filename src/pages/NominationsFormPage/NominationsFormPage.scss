@@ -1,11 +1,59 @@
 @use "../../styles/partials/base/breakpoints";
+@use "../../styles/partials/base/typography";
+@use "../../styles/partials/base/color";
 @use "../../styles/partials/layout/margin";
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/layout/display";
 
 .nominations-page {
+  margin: 0 auto;
   margin-bottom: margin.$page-bottom;
+  max-width: display.$desktop-max-width;
+  @include padding.sides;
 
   @include breakpoints.large-phone {
     margin-bottom: 0;
     margin-top: margin.$page-top;
+  }
+
+  &__intro {
+    @include padding.top-bottom(2rem, 1rem);
+    @include display.flexbox(column, center, start, wrap);
+  }
+
+  &__heading {
+    @include typography.page-heading;
+  }
+
+  &__tagline {
+    @include typography.tagline;
+  }
+
+  &__page-description {
+    @include padding.top-bottom(1rem, 0rem);
+  }
+
+  &__text-link {
+    @include typography.text-link;
+  }
+
+  &__section-heading {
+    @include typography.section-heading;
+  }
+
+  &__change-form-button {
+    background-color: color.$dark;
+    box-shadow: inset 0rem 0rem 0.07rem 0.02rem color.$dark-hover;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 0.2rem 0.9rem;
+    font-size: typography.$button-font-size;
+    transition: background-color 0.5s ease-out;
+
+    &:hover {
+      background-color: color.$dark-hover;
+      cursor: pointer;
+    }
   }
 }
