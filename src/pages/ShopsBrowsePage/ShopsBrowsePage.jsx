@@ -26,7 +26,7 @@ export const ShopsBrowsePage = () => {
   }
 
   return (
-    <div>
+    <main className="shops">
       <p>Shops</p>
       <FilterShopsForm
         setShops={setShops}
@@ -34,7 +34,7 @@ export const ShopsBrowsePage = () => {
       />
       <p onClick={fetchShops}>Refresh shops</p>
       {shopSearchMessage ? <p>{shopSearchMessage}</p> : <></>}
-      <MapBox shops={shops} />
-    </div>
+      {/* <MapBox shops={shops} /> */}
+    </main>
   );
 };

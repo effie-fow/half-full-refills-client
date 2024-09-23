@@ -23,6 +23,7 @@
 - <a href="https://www.svgrepo.com/svg/483988/wheelchair-2">Wheelchair</a>
 - <a href="https://www.svgrepo.com/svg/535325/copy">Copy</a>
 - <a href="https://www.svgrepo.com/svg/393319/marker">Marker</a>
+- <a href="https://www.svgrepo.com/svg/489491/information-circle">Info</a>
 
 Images:
 

@@ -1,0 +1,56 @@
+@use "../../styles/partials/base/color";
+@use "../../styles/partials/base/breakpoints";
+@use "../../styles/partials/layout/display";
+
+.header {
+  display: none;
+
+  @include breakpoints.large-phone {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: color.$primary;
+    padding: 1.25rem 3rem;
+    color: white;
+    @include display.flexbox(row, center, center, wrap);
+
+    &__nav {
+      width: 100%;
+      max-width: 70rem;
+      @include display.flexbox(row, space-between, center, wrap);
+    }
+
+    &__logo {
+      height: 3rem;
+    }
+
+    &__text-links {
+      margin: 0;
+      padding: 0;
+      @include display.flexbox(row, space-between, center, wrap, 2rem);
+    }
+
+    &__link {
+      text-decoration: none;
+      color: white;
+      font-weight: 300;
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+
+      &:hover {
+        color: color.$light;
+      }
+
+      &--active {
+        font-weight: 500;
+        box-shadow: inset 0rem 0.05rem 0.2rem 0.05rem color.$primary-hover;
+
+        &:hover {
+          color: white;
+          cursor: default;
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 @use "../../styles/partials/base/breakpoints";
 @use "../../styles/partials/layout/margin";
 
-.home {
+.about {
   margin-bottom: margin.$page-bottom;
 
   @include breakpoints.large-phone {
