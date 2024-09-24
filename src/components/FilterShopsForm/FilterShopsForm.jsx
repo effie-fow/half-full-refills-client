@@ -11,9 +11,11 @@ import { TextInput } from "../TextInput/TextInput";
 import { ItemCheckbox } from "../ItemCheckbox/ItemCheckbox";
 import { CheckboxInstructions } from "../CheckboxInstructions/CheckboxInstructions";
 import { Divider } from "../Divider/Divider";
+import { Navigate } from "react-router-dom";
 
 export const FilterShopsForm = ({ setShops, setShopSearchMessage }) => {
   const [items, setItems] = useState(null);
+  const [serverDown, setServerDown] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -114,6 +116,7 @@ export const FilterShopsForm = ({ setShops, setShopSearchMessage }) => {
       event.target.reset();
     } catch (error) {
       console.error(error);
+      setServerDown(true);
     }
   };
 
@@ -123,6 +126,7 @@ export const FilterShopsForm = ({ setShops, setShopSearchMessage }) => {
       return activeShops;
     } catch (error) {
       console.error(error);
+      setServerDown(true);
     }
   };
 
@@ -132,6 +136,7 @@ export const FilterShopsForm = ({ setShops, setShopSearchMessage }) => {
       setItems(itemsData);
     } catch (error) {
       console.error(error);
+      setServerDown(true);
     }
   };
 
@@ -141,6 +146,10 @@ export const FilterShopsForm = ({ setShops, setShopSearchMessage }) => {
 
   if (!items) {
     return <div>Loading...</div>;
+  }
+
+  if (serverDown) {
+    return <Navigate to="/500" />;
   }
 
   return (

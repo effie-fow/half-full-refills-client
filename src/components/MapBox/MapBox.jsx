@@ -3,6 +3,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import mapboxgl from "mapbox-gl";
 import { useRef, useEffect, useState } from "react";
 import { ShopInfoCard } from "../ShopInfoCard/ShopInfoCard";
+import { Navigate } from "react-router-dom";
 
 export const MapBox = ({ shops }) => {
   const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;
@@ -14,6 +15,10 @@ export const MapBox = ({ shops }) => {
 
   const [center, setCenter] = useState(initialCenter);
   const [zoom, setZoom] = useState(initialZoom);
+
+  if (typeof shops === "string") {
+    return <Navigate to="/500" />;
+  }
 
   shops.forEach((shop) => {
     if (typeof shop.coordinates === "string") {
@@ -48,8 +53,8 @@ export const MapBox = ({ shops }) => {
         .setPopup(
           new mapboxgl.Popup({ offset: 25 }).setHTML(
             `<p class="map__pop-up-name">${shop.name}</p>
-            <p class="map__pop-up-address">${shop.street_number} ${shop.street_name}</p>
-            <p class="map__pop-up-refills">Refillable items: ${shop.items.length}</p>`
+                <p class="map__pop-up-address">${shop.street_number} ${shop.street_name}</p>
+                <p class="map__pop-up-refills">Refillable items: ${shop.items.length}</p>`
           )
         )
         .addTo(mapRef.current);

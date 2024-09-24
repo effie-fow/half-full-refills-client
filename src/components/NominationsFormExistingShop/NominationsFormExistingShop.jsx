@@ -1,4 +1,5 @@
 import "./NominationsFormExistingShop.scss";
+import "react-dropdown/style.css";
 import Dropdown from "react-dropdown";
 import { useEffect, useState } from "react";
 import { ItemCheckbox } from "../ItemCheckbox/ItemCheckbox";
@@ -12,7 +13,6 @@ import {
   postNominationItems,
   getSingleShop,
 } from "../../utils/apiUtils";
-import "react-dropdown/style.css";
 
 export const NominationsFormExistingShop = () => {
   const [nominatedShops, setNominatedShops] = useState(null);
@@ -22,6 +22,7 @@ export const NominationsFormExistingShop = () => {
   const [shopActivated, setShopActivated] = useState("");
   const [emptyFieldMessage, setEmptyFieldMessage] = useState("");
   const [thankYouMessage, setThankYouMessage] = useState("");
+  const [serverDown, setServerDown] = useState(false);
 
   const fetchNominatedShops = async () => {
     const shopsForDropdown = [];
@@ -43,6 +44,7 @@ export const NominationsFormExistingShop = () => {
       });
     } catch (error) {
       console.error(error);
+      setServerDown(true);
     }
     setDropDownShops(shopsForDropdown);
     setNominatedShops(shopsNameId);
@@ -54,6 +56,7 @@ export const NominationsFormExistingShop = () => {
       setItems(itemsData);
     } catch (error) {
       console.error(error);
+      setServerDown(true);
     }
   };
 
@@ -117,6 +120,7 @@ export const NominationsFormExistingShop = () => {
       fetchNominatedShops();
     } catch (error) {
       console.error(error);
+      setServerDown(true);
     }
   };
 
@@ -127,6 +131,10 @@ export const NominationsFormExistingShop = () => {
 
   if (!dropDownShops || !nominatedShops || !items) {
     return <div>Loading...</div>;
+  }
+
+  if (serverDown) {
+    return <Navigate to="/500" />;
   }
 
   return (

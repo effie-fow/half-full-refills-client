@@ -8,6 +8,7 @@ import { Header } from "./components/Header/Header";
 import { FooterNavPhone } from "./components/FooterNavPhone/FooterNavPhone";
 import { Footer } from "./components/Footer/Footer";
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
+import { ServerErrorPage } from "./pages/ServerErrorPage/ServerErrorPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/shops" element={<ShopsBrowsePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/*" element={<NotFoundPage />} />
+        <Route path="/500" element={<ServerErrorPage />} />
       </Routes>
       <FooterNavPhone />
       <Footer />

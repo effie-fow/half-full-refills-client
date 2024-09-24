@@ -7,6 +7,7 @@ import { ShopsIntro } from "../../components/ShopsIntro/ShopsIntro";
 
 export const ShopsBrowsePage = () => {
   const [shops, setShops] = useState(null);
+  const [serverDown, setServerDown] = useState(false);
   const [shopSearchMessage, setShopSearchMessage] = useState("");
   const [browsingType, setBrowsingType] = useState(
     "I'm looking for something specific"
@@ -18,6 +19,7 @@ export const ShopsBrowsePage = () => {
       setShops(activeShops);
     } catch (error) {
       console.error(error);
+      setServerDown(true);
     }
   };
 
@@ -35,6 +37,10 @@ export const ShopsBrowsePage = () => {
 
   if (!shops) {
     return <div>Loading...</div>;
+  }
+
+  if (serverDown) {
+    return <Navigate to="/500" />;
   }
 
   return (
@@ -58,7 +64,7 @@ export const ShopsBrowsePage = () => {
           <></>
         )}
       </div>
-      {/* <MapBox shops={shops} /> */}
+      {shops ? <MapBox shops={shops} /> : <></>}
       <div className="shops__refresh-shops-container">
         <span className="shops__button" onClick={fetchShops}>
           Refresh Shops

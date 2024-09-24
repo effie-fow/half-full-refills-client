@@ -20,6 +20,7 @@ export const NominationsFormNewShop = () => {
   const [items, setItems] = useState(null);
   const [emptyInputMessage, setEmptyInputMessage] = useState(null);
   const [missingInput, setMissingInput] = useState(false);
+  const [serverDown, setServerDown] = useState(false);
 
   const fetchNominatedShops = async () => {
     try {
@@ -27,6 +28,7 @@ export const NominationsFormNewShop = () => {
       setNominatedShops(nominatedShopsData);
     } catch (error) {
       console.error(error);
+      setServerDown(true);
     }
   };
 
@@ -36,6 +38,7 @@ export const NominationsFormNewShop = () => {
       setItems(itemsData);
     } catch (error) {
       console.error(error);
+      setServerDown(true);
     }
   };
 
@@ -102,6 +105,7 @@ export const NominationsFormNewShop = () => {
       await fetchNominatedShops();
     } catch (error) {
       console.error(error);
+      setServerDown(true);
     }
   };
 
@@ -112,6 +116,10 @@ export const NominationsFormNewShop = () => {
 
   if (!nominatedShops || !items) {
     return <div>Loading...</div>;
+  }
+
+  if (serverDown) {
+    return <Navigate to="/500" />;
   }
 
   return (
