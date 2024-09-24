@@ -1,0 +1,52 @@
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/layout/display";
+@use "../../styles/partials/base/typography";
+@use "../../styles/partials/base/breakpoints";
+
+.about-intro {
+  @include padding.top-bottom(1rem, 1rem);
+  @include display.flexbox(column, center, start, wrap);
+
+  @include breakpoints.desktop {
+    padding-top: 0;
+  }
+
+  &__heading {
+    @include typography.page-heading;
+
+    @include breakpoints.tablet {
+      padding-top: 1rem;
+    }
+  }
+
+  &__tagline {
+    @include typography.tagline;
+  }
+
+  &__section-heading {
+    @include typography.section-heading;
+    & {
+      @include padding.top-bottom(2rem, 0);
+    }
+  }
+
+  &__page-description {
+    @include padding.top-bottom(1rem, 0rem);
+  }
+
+  &__text-link {
+    @include typography.text-link;
+  }
+
+  &__hero {
+    display: none;
+
+    @include breakpoints.tablet {
+      display: block;
+      width: 100%;
+      border-radius: 4px;
+      height: 20rem;
+      object-fit: cover;
+    }
+  }
+}

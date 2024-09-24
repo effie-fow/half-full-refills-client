@@ -58,7 +58,7 @@ export const ShopsBrowsePage = () => {
           <></>
         )}
       </div>
-      <MapBox shops={shops} />
+      {/* <MapBox shops={shops} /> */}
       <div className="shops__refresh-shops-container">
         <span className="shops__button" onClick={fetchShops}>
           Refresh Shops

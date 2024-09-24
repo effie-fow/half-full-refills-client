@@ -4,17 +4,15 @@ import { useEffect, useState } from "react";
 import { ItemCheckbox } from "../ItemCheckbox/ItemCheckbox";
 import { Button } from "../Button/Button";
 import { countNominations } from "../../utils/countNominations";
+import { Navigate } from "react-router-dom";
+import { CheckboxInstructions } from "../CheckboxInstructions/CheckboxInstructions";
 import {
   getNominatedShops,
   getAllItems,
   postNominationItems,
   getSingleShop,
 } from "../../utils/apiUtils";
-// CUSTOMISE REACT DROPDOWN LATER AND REMOVE THIS -------
 import "react-dropdown/style.css";
-import { Navigate } from "react-router-dom";
-import { CheckboxInstructions } from "../CheckboxInstructions/CheckboxInstructions";
-// ------------------------------------------------------
 
 export const NominationsFormExistingShop = () => {
   const [nominatedShops, setNominatedShops] = useState(null);

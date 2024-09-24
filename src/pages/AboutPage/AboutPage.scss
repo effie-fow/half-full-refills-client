@@ -1,11 +1,21 @@
 @use "../../styles/partials/base/breakpoints";
 @use "../../styles/partials/layout/margin";
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/layout/display";
 
 .about {
   margin-bottom: margin.$page-bottom;
+  @include padding.top-bottom(0, 2rem);
+  @include padding.sides;
 
   @include breakpoints.large-phone {
     margin-bottom: 0;
     margin-top: margin.$page-top;
+  }
+
+  @include breakpoints.desktop {
+    margin: margin.$page-top auto 0;
+    max-width: display.$desktop-max-width;
+    @include padding.top-bottom(2rem, 4rem);
   }
 }

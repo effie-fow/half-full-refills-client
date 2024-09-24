@@ -1,0 +1,36 @@
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/layout/display";
+@use "../../styles/partials/base/typography";
+@use "../../styles/partials/base/color";
+
+.about-products {
+  @include padding.top-bottom(0, 1rem);
+  @include display.flexbox(column, center, start, wrap);
+
+  &__tagline {
+    @include typography.tagline;
+  }
+
+  &__section-heading {
+    @include typography.section-heading;
+
+    & {
+      padding-bottom: 0;
+    }
+  }
+
+  &__description {
+    @include padding.top-bottom(1rem, 0rem);
+  }
+
+  &__text-link {
+    @include typography.text-link;
+  }
+
+  &__reminder {
+    color: color.$accent;
+    font-size: 1.1rem;
+    font-weight: 400;
+    @include padding.top-bottom(1rem, 0);
+  }
+}
