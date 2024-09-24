@@ -1,12 +1,75 @@
 @use "../../styles/partials/layout/display";
 @use "../../styles/partials/layout/padding";
+@use "../../styles/partials/base/typography";
+@use "../../styles/partials/base/color";
+@use "../../styles/partials/base/breakpoints";
 
 .info-card {
   &__container {
-    @include padding.top-bottom(1rem, 1rem);
+    border: 1px solid color.$off-white;
+    border-bottom: 1px solid color.$accent;
+    padding: 0.25rem 0;
+    margin-top: 0.75rem;
+    border-radius: 4px;
+    background-color: white;
+    color: color.$dark;
+    box-shadow: none;
+    transition: background-color, box-shadow, color 0.25s ease-out;
+    @include display.flexbox(column, center, start, wrap);
+
+    &:hover {
+      cursor: pointer;
+      background-color: color.$dark;
+      box-shadow: inset 0rem 0rem 0.5rem 0.25rem color.$dark-hover;
+      color: white;
+    }
+
+    &:hover .info-card__shop-name {
+      color: white;
+    }
+
+    @include breakpoints.tablet {
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  &__shop-details {
+    width: 100%;
+    @include breakpoints.tablet {
+      padding-bottom: 0.5rem;
+      @include display.flexbox(row, space-between, center, wrap);
+    }
+  }
+
+  &__shop-name {
+    @include typography.section-heading;
+    padding: 0;
+  }
+
+  &__address-container {
+    @include padding.top-bottom(0, 0.5rem);
+    @include display.flexbox(column, center, start, wrap);
+
+    @include breakpoints.tablet {
+      @include display.flexbox(row, end, center, wrap, 0.5rem);
+    }
+  }
+
+  &__address-line-1 {
+    font-weight: 400;
   }
 
   &__items-list {
     @include display.flexbox(row, start, center, wrap, 0.5rem);
+
+    @include breakpoints.large-phone {
+      max-width: 43rem;
+      @include display.flexbox(row, space-between, center, wrap, 0.5rem);
+    }
+
+    @include breakpoints.tablet {
+      max-width: none;
+      @include display.flexbox(row, start, center, wrap, 0.5rem);
+    }
   }
 }

@@ -1,0 +1,24 @@
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/layout/display";
+@use "../../styles/partials/base/typography";
+
+.shops-intro {
+  @include padding.top-bottom(2rem, 1rem);
+  @include display.flexbox(column, center, start, wrap);
+
+  &__heading {
+    @include typography.page-heading;
+  }
+
+  &__tagline {
+    @include typography.tagline;
+  }
+
+  &__page-description {
+    @include padding.top-bottom(1rem, 0rem);
+  }
+
+  &__text-link {
+    @include typography.text-link;
+  }
+}

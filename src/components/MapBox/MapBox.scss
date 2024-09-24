@@ -1,12 +1,22 @@
 @use "../../styles/partials/base/color";
+@use "../../styles/partials/base/breakpoints";
 
 .map {
   position: relative;
+  scroll-margin-top: 5rem;
+
+  @include breakpoints.large-phone {
+    scroll-margin-top: 10rem;
+  }
+
+  @include breakpoints.desktop {
+    scroll-margin-top: 12rem;
+  }
 
   &__container {
     width: 100%;
     height: 25rem;
-    border: 2px solid blue;
+    border-radius: 4px;
   }
 
   &__reset-button {
@@ -26,15 +36,27 @@
       background-color: color.$accent-hover;
     }
   }
-}
 
-.mapboxgl-popup {
-  width: 9rem;
-  padding-bottom: 1rem;
-}
+  .map__pop-up-name {
+    font-family: "Hind Siliguri";
+    font-size: 1.1rem;
+    color: color.$primary;
+    font-weight: 300;
+  }
 
-.mapboxgl-popup-content {
-  font-family: "Hind Siliguri";
-  font-size: 0.9rem;
-  color: color.$dark;
+  .map__pop-up-address {
+    font-family: "Hind Siliguri";
+    font-weight: 300;
+    font-size: 0.75rem;
+    color: color.$grey;
+  }
+
+  .map__pop-up-refills {
+    font-family: "Hind Siliguri";
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: color.$dark;
+    border-top: 1px solid color.$accent;
+    padding-top: 0.2rem;
+  }
 }

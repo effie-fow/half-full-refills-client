@@ -1,10 +1,28 @@
 @use "../../styles/partials/layout/display";
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/base/breakpoints";
 
 .filter-shops-form {
+  @include padding.top-bottom(1rem, 0);
+
+  &__strict-search-container {
+    @include padding.top-bottom(0.5rem, 0.5rem);
+  }
+
+  &__button-container {
+    @include padding.top-bottom(0.5rem, 0);
+    @include display.flexbox(row, center, center, wrap);
+
+    @include breakpoints.large-phone {
+      @include display.flexbox(row, end, center, wrap);
+    }
+  }
+
   &__checkboxes {
     border: none;
     padding: 0;
     margin: 0;
+    @include padding.top-bottom(0.5rem, 1rem);
     @include display.flexbox(row, start, center, wrap, 0.5rem);
   }
 }

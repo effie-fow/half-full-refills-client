@@ -8,6 +8,7 @@ export const MapBox = ({ shops }) => {
   const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;
   const mapRef = useRef();
   const mapContainerRef = useRef();
+  const mapScrollToRef = useRef();
   const initialCenter = [-0.11427566747321748, 50.8170309602071];
   const initialZoom = 13;
 
@@ -39,12 +40,18 @@ export const MapBox = ({ shops }) => {
 
     shops.forEach((shop) => {
       new mapboxgl.Marker({
-        color: "black",
+        color: "#1d6b22",
         id: "marker",
         coordinates: shop.coordinates,
       })
         .setLngLat(shop.coordinates)
-        .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(shop.name))
+        .setPopup(
+          new mapboxgl.Popup({ offset: 25 }).setHTML(
+            `<p class="map__pop-up-name">${shop.name}</p>
+            <p class="map__pop-up-address">${shop.street_number} ${shop.street_name}</p>
+            <p class="map__pop-up-refills">Refillable items: ${shop.items.length}</p>`
+          )
+        )
         .addTo(mapRef.current);
     });
 
@@ -77,11 +84,12 @@ export const MapBox = ({ shops }) => {
     setCenter(coordinates);
     setZoom(12);
     mapRef.current.flyTo({ center: coordinates, zoom: 16 });
+    mapScrollToRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section>
-      <article className="map">
+      <article ref={mapScrollToRef} className="map">
         <div
           id="map-container"
           ref={mapContainerRef}

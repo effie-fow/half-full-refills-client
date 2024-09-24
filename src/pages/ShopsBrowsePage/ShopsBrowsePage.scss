@@ -1,11 +1,56 @@
 @use "../../styles/partials/base/breakpoints";
+@use "../../styles/partials/base/typography";
+@use "../../styles/partials/base/color";
 @use "../../styles/partials/layout/margin";
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/layout/display";
 
 .shops {
   margin-bottom: margin.$page-bottom;
+  @include padding.top-bottom(0, 3rem);
+  @include padding.sides;
 
   @include breakpoints.large-phone {
     margin-bottom: 0;
+    margin: 0 auto;
     margin-top: margin.$page-top;
+  }
+
+  @include breakpoints.tablet {
+    max-width: display.$desktop-max-width;
+  }
+
+  &__button {
+    background-color: color.$dark;
+    box-shadow: inset 0rem 0rem 0.07rem 0.02rem color.$dark-hover;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 0.2rem 0.9rem;
+    font-size: typography.$button-font-size;
+    transition: background-color 0.5s ease-out;
+
+    &:hover {
+      background-color: color.$dark-hover;
+      cursor: pointer;
+    }
+  }
+
+  &__search-message-container {
+    width: 100%;
+    height: 2rem;
+    color: color.$accent;
+    font-weight: 500;
+    @include display.flexbox(row, center, center, wrap);
+  }
+
+  &__refresh-shops-container {
+    width: 100%;
+    @include padding.top-bottom(1rem, 0);
+    @include display.flexbox(row, center, center, wrap);
+
+    @include breakpoints.tablet {
+      @include display.flexbox(row, end, center, wrap);
+    }
   }
 }

@@ -1,8 +1,9 @@
 @use "../../styles/partials/base/color";
+@use "../../styles/partials/base/breakpoints";
 @use "../../styles/partials/layout/display";
 
 .item-card {
-  width: 13rem;
+  width: 10.5rem;
   @include display.flexbox(row, start, center, wrap, 0.5rem);
 
   &__icon-container {
