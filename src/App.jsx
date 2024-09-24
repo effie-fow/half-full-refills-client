@@ -6,6 +6,7 @@ import { ShopsBrowsePage } from "./pages/ShopsBrowsePage/ShopsBrowsePage";
 import { AboutPage } from "./pages/AboutPage/AboutPage";
 import { Header } from "./components/Header/Header";
 import { FooterNavPhone } from "./components/FooterNavPhone/FooterNavPhone";
+import { Footer } from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
       </Routes>
       <FooterNavPhone />
+      <Footer />
     </BrowserRouter>
   );
 }

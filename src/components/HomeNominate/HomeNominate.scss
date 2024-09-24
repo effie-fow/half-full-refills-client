@@ -1,0 +1,93 @@
+@use "../../styles/partials/base/breakpoints";
+@use "../../styles/partials/base/color";
+@use "../../styles/partials/base/typography";
+@use "../../styles/partials/layout/margin";
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/layout/display";
+@use "../../styles/partials/styling/button";
+
+.home-nominate {
+  @include padding.top-bottom(1rem, 2rem);
+  @include display.flexbox(column, center, center, wrap, 1rem);
+
+  @include breakpoints.desktop {
+    @include padding.top-bottom(3rem, 4rem);
+  }
+
+  &__info {
+    @include display.flexbox(row, space-between, center, wrap);
+  }
+
+  &__icons {
+    width: 50%;
+    @include display.flexbox(row, center, center, wrap, 0.2rem);
+  }
+
+  &__checklist-icon {
+    height: 3rem;
+    transform: rotate(-6deg);
+    display: none;
+
+    @include breakpoints.tablet {
+      display: block;
+      height: 5.5rem;
+    }
+  }
+
+  &__arrow-icon {
+    height: 1.5rem;
+    transform: rotate(178deg);
+    padding-right: 0.9rem;
+    display: none;
+
+    @include breakpoints.tablet {
+      display: block;
+      height: 2.5rem;
+    }
+  }
+
+  &__trophy-icon {
+    @include breakpoints.small-phone {
+      height: 6rem;
+    }
+
+    & {
+      height: 8rem;
+    }
+
+    @include breakpoints.tablet {
+      height: 5.85rem;
+    }
+  }
+
+  &__details {
+    width: 50%;
+  }
+
+  &__heading {
+    @include typography.section-heading;
+  }
+
+  &__button-container {
+    width: 100%;
+    padding-top: 0.5rem;
+    @include display.flexbox(row, center, center, wrap);
+
+    @include breakpoints.large-phone {
+      @include display.flexbox(row, start, center, wrap);
+    }
+
+    @include breakpoints.tablet {
+      @include display.flexbox(row, end, center, wrap);
+    }
+  }
+
+  &__button {
+    text-decoration: none;
+    @include button.button(color.$accent, color.$accent-hover);
+
+    @include breakpoints.large-phone {
+      margin-left: 50%;
+    }
+  }
+}

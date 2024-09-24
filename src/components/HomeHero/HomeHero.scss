@@ -1,0 +1,66 @@
+@use "../../styles/partials/base/breakpoints";
+@use "../../styles/partials/layout/display";
+
+.hero {
+  width: 100%;
+  height: 20rem;
+  background: right -5rem center / 150% no-repeat url("../../assets/images/photos/veg-circle.jpg");
+  @include display.flexbox(row, center, center, wrap);
+
+  @include breakpoints.small-phone {
+    background-size: 200%;
+    background-position: right -9rem center;
+  }
+
+  @include breakpoints.large-phone {
+    background-size: 120%;
+    background-position: right -2rem center;
+  }
+
+  @include breakpoints.tablet {
+    height: 25rem;
+    background-size: 110%;
+    background-position: right -1rem center;
+  }
+
+  @include breakpoints.desktop {
+    height: 30rem;
+    background-size: 110%;
+    background-position: right -1rem center;
+  }
+
+  &__overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    @include display.flexbox(column, center, center, wrap, 2rem);
+  }
+
+  &__logo {
+    height: 3.5rem;
+
+    @include breakpoints.tablet {
+      height: 4.5rem;
+    }
+
+    @include breakpoints.desktop {
+      height: 5.5rem;
+    }
+  }
+
+  &__subheading {
+    max-width: 15.5rem;
+    font-size: 1.32rem;
+    line-height: 1.25;
+
+    @include breakpoints.tablet {
+      max-width: 19.95rem;
+      font-size: 1.7rem;
+    }
+
+    @include breakpoints.desktop {
+      max-width: 23.5rem;
+      font-size: 2rem;
+    }
+  }
+}

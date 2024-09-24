@@ -1,0 +1,46 @@
+@use "../../styles/partials/base/color";
+@use "../../styles/partials/base/typography";
+@use "../../styles/partials/base/breakpoints";
+@use "../../styles/partials/layout/display";
+@use "../../styles/partials/layout/padding";
+
+.footer {
+  display: none;
+
+  @include breakpoints.large-phone {
+    display: block;
+    background-color: color.$primary;
+
+    &__nav {
+      @include padding.top-bottom(2.5rem, 2rem);
+      @include padding.sides;
+    }
+
+    &__logo-container {
+      height: 3rem;
+      @include display.flexbox(row, center, center, wrap);
+    }
+
+    &__logo {
+      height: 100%;
+    }
+
+    &__text-links {
+      margin: 0;
+      padding: 0;
+      @include padding.top-bottom(1.5rem, 1rem);
+      @include display.flexbox(row, center, center, wrap);
+    }
+
+    &__link {
+      @include typography.text-link;
+      color: white;
+      padding: 0 1rem;
+
+      &--middle {
+        border-left: 1px solid white;
+        border-right: 1px solid white;
+      }
+    }
+  }
+}

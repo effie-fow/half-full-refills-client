@@ -1,0 +1,111 @@
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/layout/display";
+@use "../../styles/partials/base/typography";
+@use "../../styles/partials/base/color";
+@use "../../styles/partials/base/breakpoints";
+
+.home-about {
+  background-color: color.$primary;
+  color: white;
+  width: 100%;
+  @include display.flexbox(row, center, center, wrap);
+
+  &__sub-container {
+    width: 100%;
+    max-width: 670px;
+    @include display.flexbox(row, space-between, center, wrap);
+    @include padding.top-bottom(1rem, 1rem);
+    @include padding.sides;
+
+    @include breakpoints.large-phone {
+      @include padding.top-bottom(2rem, 3rem);
+    }
+
+    @include breakpoints.tablet {
+      width: 85%;
+      border-bottom: 1px solid white;
+    }
+
+    @include breakpoints.desktop {
+      max-width: display.$desktop-max-width;
+    }
+  }
+
+  &__details {
+    width: 55%;
+
+    @include breakpoints.small-phone {
+      width: 100%;
+    }
+
+    @include breakpoints.tablet {
+      width: 65%;
+    }
+  }
+
+  &__heading {
+    @include typography.section-heading;
+    color: white;
+  }
+
+  &__description {
+    padding-bottom: 1rem;
+  }
+
+  &__icons-container {
+    width: 45%;
+    @include display.flexbox(column, center, center, wrap);
+
+    @include breakpoints.small-phone {
+      display: none;
+    }
+
+    @include breakpoints.tablet {
+      width: 35%;
+    }
+  }
+
+  &__butterfly-container {
+    width: 100%;
+    @include display.flexbox(row, end, center, wrap);
+  }
+
+  &__butterfly-icon {
+    height: 3rem;
+    padding-right: 2rem;
+
+    @include breakpoints.large-phone {
+      height: 3.25rem;
+      padding-right: 2rem;
+    }
+
+    @include breakpoints.desktop {
+      padding-right: 5rem;
+    }
+  }
+
+  &__plant-icon {
+    height: 10rem;
+    margin-bottom: -2rem;
+
+    @include breakpoints.desktop {
+      height: 11rem;
+      margin-bottom: -2.25rem;
+    }
+  }
+
+  &__plant-pot-icon {
+    height: 6rem;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+      color: color.$light;
+    }
+  }
+}

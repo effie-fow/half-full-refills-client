@@ -1,11 +1,31 @@
 @use "../../styles/partials/base/breakpoints";
+@use "../../styles/partials/base/color";
+@use "../../styles/partials/base/typography";
 @use "../../styles/partials/layout/margin";
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/layout/display";
+@use "../../styles/partials/styling/button";
 
 .home {
+  margin: 0 auto;
   margin-bottom: margin.$page-bottom;
+  width: 100%;
 
   @include breakpoints.large-phone {
     margin-bottom: 0;
     margin-top: margin.$page-top;
+  }
+
+  @include breakpoints.small-phone {
+    margin-bottom: 4.25rem;
+  }
+
+  &__signposts {
+    margin: 0 auto;
+    @include padding.sides;
+
+    @include breakpoints.desktop {
+      max-width: display.$desktop-max-width;
+    }
   }
 }
