@@ -7,6 +7,7 @@ import { AboutPage } from "./pages/AboutPage/AboutPage";
 import { Header } from "./components/Header/Header";
 import { FooterNavPhone } from "./components/FooterNavPhone/FooterNavPhone";
 import { Footer } from "./components/Footer/Footer";
+import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/nominate" element={<NominationsFormPage />} />
         <Route path="/shops" element={<ShopsBrowsePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <FooterNavPhone />
       <Footer />

@@ -1,0 +1,25 @@
+@use "../../styles/partials/layout/display";
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/base/typography";
+
+.not-found {
+  width: 100%;
+  height: 90vh;
+  text-align: center;
+  @include display.flexbox(column, center, center, wrap, 1rem);
+  @include padding.sides;
+
+  &__icon {
+    height: 7rem;
+  }
+
+  &__heading {
+    padding-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+
+  &__link {
+    @include typography.text-link;
+  }
+}

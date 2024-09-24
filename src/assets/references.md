@@ -24,6 +24,7 @@
 - <a href="https://www.svgrepo.com/svg/535325/copy">Copy</a>
 - <a href="https://www.svgrepo.com/svg/393319/marker">Marker</a>
 - <a href="https://www.svgrepo.com/svg/489491/information-circle">Info</a>
+- <a href="https://www.svgrepo.com/svg/173438/signpost">Signpost</a>
 
 Images:
 
