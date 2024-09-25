@@ -21,6 +21,10 @@
     @include display.flexbox(column, center, start, wrap);
   }
 
+  &__form {
+    @include display.flexbox(column, center, start, wrap);
+  }
+
   &__heading {
     @include typography.page-heading;
   }
@@ -48,6 +52,7 @@
     border: none;
     border-radius: 3px;
     padding: 0.2rem 0.9rem;
+    margin-bottom: 1rem;
     font-size: typography.$button-font-size;
     transition: background-color 0.5s ease-out;
 

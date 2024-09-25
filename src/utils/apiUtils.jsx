@@ -178,6 +178,7 @@ export const loginUser = async (userLoginDetails) => {
     return data;
   } catch (error) {
     console.error(error);
+    throw new Error();
   }
 };
 

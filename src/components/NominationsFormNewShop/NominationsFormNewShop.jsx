@@ -15,7 +15,7 @@ import { CheckboxInstructions } from "../CheckboxInstructions/CheckboxInstructio
 import { FormFieldsInstructions } from "../FormFieldsInstructions/FormFieldsInstructions";
 import { Divider } from "../Divider/Divider";
 
-export const NominationsFormNewShop = () => {
+export const NominationsFormNewShop = ({ user }) => {
   const [nominatedShops, setNominatedShops] = useState(null);
   const [items, setItems] = useState(null);
   const [emptyInputMessage, setEmptyInputMessage] = useState(null);
@@ -96,7 +96,7 @@ export const NominationsFormNewShop = () => {
       }
 
       const nominationData = {
-        users_id: 7,
+        users_id: user.id,
         items: selectedItems,
       };
 
@@ -172,10 +172,12 @@ export const NominationsFormNewShop = () => {
         </div>
       </fieldset>
       <div className="new-shops-form__button-container">
+        <Button buttonText="Nominate" />
+      </div>
+      <div className="new-shops-form__message-container">
         <span className="new-shops-form__form-popup">
           {missingInput ? `${emptyInputMessage}` : ""}
         </span>
-        <Button buttonText="Nominate" />
       </div>
     </form>
   );

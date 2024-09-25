@@ -5,7 +5,7 @@ import { Button } from "../../components/Button/Button";
 import { Link } from "react-router-dom";
 import { Divider } from "../../components/Divider/Divider";
 
-export const LoginPage = ({ setIsLoggedIn, isLoggedIn }) => {
+export const LoginPage = ({ setIsLoggedIn, setUser, isLoggedIn }) => {
   const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     email: "",
@@ -35,6 +35,7 @@ export const LoginPage = ({ setIsLoggedIn, isLoggedIn }) => {
 
       localStorage.setItem("authToken", data.authToken);
       setIsLoggedIn(true);
+      setUser({ name: userData.name, id: userData.id });
       setMessage(`Welcome back, ${userData.name}! You are now logged in.`);
       event.target[0].value = "";
       event.target[1].value = "";
@@ -46,6 +47,8 @@ export const LoginPage = ({ setIsLoggedIn, isLoggedIn }) => {
       setMessage(
         "Either your email address or password is unrecognised, please try again."
       );
+      setIsLoggedIn(false);
+      localStorage.removeItem("authToken");
     }
   };
 

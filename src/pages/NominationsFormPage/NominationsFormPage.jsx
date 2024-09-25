@@ -4,7 +4,7 @@ import { NominationsFormNewShop } from "../../components/NominationsFormNewShop/
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 
-export const NominationsFormPage = ({ isLoggedIn }) => {
+export const NominationsFormPage = ({ isLoggedIn, user }) => {
   const [formType, setFormType] = useState("+ Add New Shop");
 
   const handleFormType = () => {
@@ -22,7 +22,7 @@ export const NominationsFormPage = ({ isLoggedIn }) => {
       <section className="nominations-page__intro">
         <h1 className="nominations-page__heading">Nominate</h1>
         <span className="nominations-page__tagline">
-          Ready to support your local community?
+          {`Ready to support your local community, ${user.name}?`}
         </span>
         <p className="nominations-page__page-description">
           Thank you for taking the time to nominate one of your favourite spots!
@@ -54,9 +54,9 @@ export const NominationsFormPage = ({ isLoggedIn }) => {
           {formType}
         </span>
         {formType === "+ Add New Shop" ? (
-          <NominationsFormExistingShop />
+          <NominationsFormExistingShop user={user} />
         ) : (
-          <NominationsFormNewShop />
+          <NominationsFormNewShop user={user} />
         )}
       </section>
     </main>

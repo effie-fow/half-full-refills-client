@@ -1,5 +1,6 @@
 @use "../../styles/partials/layout/form-features";
 @use "../../styles/partials/layout/padding";
+@use "../../styles/partials/layout/display";
 @use "../../styles/partials/base/color";
 
 .new-shops-form {
@@ -26,6 +27,14 @@
 
   &__button-container {
     @include form-features.button-container;
+    @include display.flexbox(row, center, center, wrap);
+  }
+
+  &__message-container {
+    min-height: 4rem;
+    text-align: center;
+    width: 100%;
+    @include padding.top-bottom(0, 2rem);
   }
 
   &__form-popup {
