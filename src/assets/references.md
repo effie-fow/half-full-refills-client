@@ -25,8 +25,11 @@
 - <a href="https://www.svgrepo.com/svg/393319/marker">Marker</a>
 - <a href="https://www.svgrepo.com/svg/489491/information-circle">Info</a>
 - <a href="https://www.svgrepo.com/svg/173438/signpost">Signpost</a>
+- <a href="https://www.svgrepo.com/svg/196372/ghost">Ghost</a>
 
 Images:
 
 - vegetables-shop - Photo by <a href="https://unsplash.com/@slestrat?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Serge Le Strat</a> on <a href="https://unsplash.com/photos/vegetables-on-rack-rS4OSc9yhSo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 - refill-jars - Photo by <a href="https://www.pexels.com/photo/clear-glass-jars-with-brown-and-white-stones-4778348/">cottonbro studio</a>
+- refilling-01 - Photo by <a href="https://www.pexels.com/photo/person-shopping-in-store-3735179/">Polina Tankilevitch</a>
+- refilling-01 - Photo by <a href="https://www.pexels.com/photo/anonymous-person-pressing-big-dispenser-taking-soap-7262484/">Sarah Chai</a>

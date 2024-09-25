@@ -9,16 +9,55 @@ import { FooterNavPhone } from "./components/FooterNavPhone/FooterNavPhone";
 import { Footer } from "./components/Footer/Footer";
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 import { ServerErrorPage } from "./pages/ServerErrorPage/ServerErrorPage";
+import { useEffect, useState } from "react";
+import { LoginRequiredPage } from "./pages/LoginRequiredPage/LoginRequiredPage";
+import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
+import { LoginPage } from "./pages/LoginPage/LoginPage";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+
+    if (authToken) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    setIsLoggedIn(false);
+  };
+
   return (
     <BrowserRouter>
-      <Header />
+      <Header handleLogout={handleLogout} isLoggedIn={isLoggedIn} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/nominate" element={<NominationsFormPage />} />
+        <Route
+          path="/nominate"
+          element={<NominationsFormPage isLoggedIn={isLoggedIn} />}
+        />
         <Route path="/shops" element={<ShopsBrowsePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route
+          path="/register"
+          element={
+            <RegisterPage
+              handleLogout={handleLogout}
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <LoginPage setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
+          }
+        />
+        <Route path="/login-register" element={<LoginRequiredPage />} />
         <Route path="/*" element={<NotFoundPage />} />
         <Route path="/500" element={<ServerErrorPage />} />
       </Routes>

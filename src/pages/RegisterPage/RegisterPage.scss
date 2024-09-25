@@ -1,0 +1,143 @@
+@use "../../styles/partials/base/breakpoints";
+@use "../../styles/partials/base/typography";
+@use "../../styles/partials/base/color";
+@use "../../styles/partials/layout/margin";
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/layout/display";
+@use "../../styles/partials/layout/form-features";
+@use "../../styles/partials/styling/button";
+
+.register {
+  margin: 0 auto;
+  margin-bottom: margin.$page-bottom;
+  max-width: display.$desktop-max-width;
+  @include padding.top-bottom(4rem, 3rem);
+  @include padding.sides;
+
+  @include breakpoints.large-phone {
+    margin-bottom: 0;
+    margin-top: margin.$page-top;
+    @include padding.top-bottom(4.5rem, 4rem);
+  }
+
+  @include breakpoints.tablet {
+    @include padding.top-bottom(2rem, 4rem);
+  }
+
+  &__hero {
+    display: none;
+    @include breakpoints.tablet {
+      display: block;
+      width: 100%;
+      border-radius: 4px;
+      height: 17rem;
+      object-fit: cover;
+      object-position: top -13rem right 0;
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  &__form-details {
+    @include breakpoints.tablet {
+      margin: 0 auto;
+      max-width: 35rem;
+    }
+  }
+
+  &__heading {
+    @include typography.page-heading;
+  }
+
+  &__instructions {
+    padding-bottom: 1rem;
+    @include typography.form-instructions;
+  }
+
+  &__form-fields {
+    @include breakpoints.tablet {
+      @include display.flexbox(column, center, center, wrap);
+    }
+  }
+
+  &__input-container {
+    @include form-features.input-container;
+  }
+
+  &__input {
+    @include form-features.input-default;
+    width: 16rem;
+  }
+
+  &__button-container {
+    width: 100%;
+    @include padding.top-bottom(2rem, 2rem);
+    @include display.flexbox(row, center, center, wrap);
+  }
+
+  &__message-container {
+    height: 2rem;
+  }
+
+  &__message {
+    font-weight: 500;
+    text-align: center;
+  }
+
+  &__text-link {
+    @include typography.text-link;
+  }
+}
+
+.logged-in {
+  margin: 0 auto;
+  margin-bottom: margin.$page-bottom;
+  max-width: display.$desktop-max-width;
+  @include padding.top-bottom(4rem, 5rem);
+  @include padding.sides;
+
+  @include breakpoints.large-phone {
+    margin-bottom: 0;
+    margin-top: margin.$page-top;
+    @include display.flexbox(row, center, center, wrap);
+  }
+
+  &__details {
+    @include display.flexbox(column, center, center, wrap, 1rem);
+
+    @include breakpoints.large-phone {
+      width: 50%;
+      padding-right: 1rem;
+      @include display.flexbox(column, center, start, wrap, 0.5rem);
+    }
+  }
+
+  &__heading {
+    line-height: 1.2;
+    @include typography.section-heading;
+  }
+
+  &__message {
+    padding-bottom: 1rem;
+
+    @include breakpoints.large-phone {
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  &__logout-button {
+    @include button.button(color.$accent, color.$accent-hover);
+  }
+
+  &__img {
+    display: none;
+
+    @include breakpoints.large-phone {
+      display: block;
+      width: 50%;
+      height: 100%;
+      max-height: 35rem;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
+}

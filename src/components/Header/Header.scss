@@ -31,7 +31,7 @@
     &__text-links {
       margin: 0;
       padding: 0;
-      @include display.flexbox(row, space-between, center, wrap, 2rem);
+      @include display.flexbox(row, space-between, center, wrap);
     }
 
     &__link {
@@ -43,6 +43,7 @@
 
       &:hover {
         color: color.$light;
+        cursor: pointer;
       }
 
       &--active {

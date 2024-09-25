@@ -1,6 +1,7 @@
 @use "../base/typography";
 
 @mixin button($color, $hover-color) {
+  text-decoration: none;
   background-color: $color;
   box-shadow: inset 0rem 0rem 0.07rem 0.02rem $hover-color;
   color: white;

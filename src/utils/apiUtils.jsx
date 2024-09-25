@@ -160,3 +160,37 @@ export const editShopDetails = async (shopId, detailsToUpdate) => {
     console.error(error);
   }
 };
+
+export const registerUser = async (userDetails) => {
+  try {
+    await axios.post(`${apiUrl}/users/register`, userDetails);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const loginUser = async (userLoginDetails) => {
+  try {
+    const { data } = await axios.post(
+      `${apiUrl}/users/login`,
+      userLoginDetails
+    );
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getUserData = async (authToken) => {
+  try {
+    const response = await axios.get(`${apiUrl}/users/profile`, {
+      headers: {
+        authorisation: `Bearer ${authToken}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

@@ -2,7 +2,7 @@ import "./Header.scss";
 import logoWhite from "../../assets/icons/logo-white.png";
 import { Link, NavLink } from "react-router-dom";
 
-export const Header = () => {
+export const Header = ({ handleLogout, isLoggedIn }) => {
   return (
     <header className="header">
       <nav className="header__nav">
@@ -50,6 +50,24 @@ export const Header = () => {
           >
             About
           </NavLink>
+          {isLoggedIn ? (
+            <span onClick={handleLogout} className="header__link">
+              Logout
+            </span>
+          ) : (
+            <NavLink
+              to="/login"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "header__link"
+                  : isActive
+                  ? "header__link header__link--active"
+                  : "header__link"
+              }
+            >
+              Login
+            </NavLink>
+          )}
         </ul>
       </nav>
     </header>
