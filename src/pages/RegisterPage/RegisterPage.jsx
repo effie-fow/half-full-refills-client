@@ -1,7 +1,7 @@
 import "./RegisterPage.scss";
 import refillingImg from "../../assets/images/photos/refilling-01.jpg";
 import refillingConditionerImg from "../../assets/images/photos/refill-conditioner.jpg";
-import { registerUser } from "../../utils/apiUtils";
+import { checkUserExists, registerUser } from "../../utils/apiUtils";
 import { useState } from "react";
 import { Button } from "../../components/Button/Button";
 import { Link } from "react-router-dom";
@@ -42,6 +42,16 @@ export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
     }
 
     try {
+      const userAlreadyExists = await checkUserExists(formData.email);
+
+      if (userAlreadyExists) {
+        setSuccess(false);
+        setErrorMessage(
+          `There is already an existing account registered with ${formData.email}`
+        );
+        return;
+      }
+
       await registerUser(formData);
       setErrorMessage("");
       setSuccess(true);
@@ -53,6 +63,7 @@ export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
       event.target[0].value = "";
       event.target[1].value = "";
       event.target[2].value = "";
+      event.target[3].value = "";
     } catch (error) {
       setErrorMessage(error);
     }

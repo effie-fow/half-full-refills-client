@@ -195,3 +195,23 @@ export const getUserData = async (authToken) => {
     throw new Error();
   }
 };
+
+export const checkUserExists = async (emailAddress) => {
+  try {
+    const response = await axios.get(`${apiUrl}/users/confirm`, {
+      headers: { email: emailAddress },
+    });
+
+    const message = response.data.message;
+
+    if (message === "New user enabled.") {
+      return false;
+    }
+
+    if (message === "User already exists.") {
+      return true;
+    }
+  } catch (error) {
+    throw new Error();
+  }
+};
