@@ -44,6 +44,18 @@
     @include display.flexbox(row, center, center, wrap);
   }
 
+  &__mapbox-container {
+    scroll-margin-top: -25rem;
+
+    @include breakpoints.large-phone {
+      scroll-margin-top: -20rem;
+    }
+
+    @include breakpoints.tablet {
+      scroll-margin-top: -19.5rem;
+    }
+  }
+
   &__refresh-shops-container {
     width: 100%;
     @include padding.top-bottom(1rem, 0);

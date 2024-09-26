@@ -73,7 +73,6 @@ export const NominationsFormNewShop = ({ user }) => {
 
     try {
       const { street_number, street_name, city } = newShop;
-
       const shopAlreadyExists = await checkShopExists(
         street_number,
         street_name,
@@ -118,8 +117,8 @@ export const NominationsFormNewShop = ({ user }) => {
       };
 
       await postNominationItems(newShopId, nominationData);
-      event.target.reset();
       setNewShopAdded(true);
+      event.target.reset();
       await fetchNominatedShops();
     } catch (error) {
       console.error(error);

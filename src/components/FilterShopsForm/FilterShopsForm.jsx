@@ -13,7 +13,11 @@ import { CheckboxInstructions } from "../CheckboxInstructions/CheckboxInstructio
 import { Divider } from "../Divider/Divider";
 import { Navigate } from "react-router-dom";
 
-export const FilterShopsForm = ({ setShops, setShopSearchMessage }) => {
+export const FilterShopsForm = ({
+  setShops,
+  setShopSearchMessage,
+  searchScrollRef,
+}) => {
   const [items, setItems] = useState(null);
   const [serverDown, setServerDown] = useState(false);
 
@@ -25,7 +29,7 @@ export const FilterShopsForm = ({ setShops, setShopSearchMessage }) => {
     const selectedItems = [];
     const strictSearch = event.target[20].checked;
 
-    for (let i = 1; i < items.length + 1; i++) {
+    for (let i = 2; i < items.length + 2; i++) {
       if (event.target[i].checked) {
         selectedItems.push(event.target[i].name);
       }
@@ -58,6 +62,7 @@ export const FilterShopsForm = ({ setShops, setShopSearchMessage }) => {
                 `Happy days, we found ${foundShops.length} shops in ${searchedCity} that you're going to love!`
               );
           setTimeout(() => setShopSearchMessage(""), 5000);
+          searchScrollRef.current.scrollIntoView({ behavior: "smooth" });
         }
       }
 
@@ -82,6 +87,7 @@ export const FilterShopsForm = ({ setShops, setShopSearchMessage }) => {
                 `Great news, we found ${foundShops.length} shops that match your criteria!`
               );
           setTimeout(() => setShopSearchMessage(""), 4000);
+          searchScrollRef.current.scrollIntoView({ behavior: "smooth" });
         }
       }
 
@@ -110,6 +116,7 @@ export const FilterShopsForm = ({ setShops, setShopSearchMessage }) => {
                 `Great news, we found ${foundShops.length} shops that match your criteria in ${searchedCity}!`
               );
           setTimeout(() => setShopSearchMessage(""), 4000);
+          searchScrollRef.current.scrollIntoView({ behavior: "smooth" });
         }
       }
 

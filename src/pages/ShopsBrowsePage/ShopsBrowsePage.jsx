@@ -1,11 +1,12 @@
 import "./ShopsBrowsePage.scss";
 import { MapBox } from "../../components/MapBox/MapBox";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getActiveShops } from "../../utils/apiUtils";
 import { FilterShopsForm } from "../../components/FilterShopsForm/FilterShopsForm";
 import { ShopsIntro } from "../../components/ShopsIntro/ShopsIntro";
 
 export const ShopsBrowsePage = () => {
+  const searchScrollRef = useRef();
   const [shops, setShops] = useState(null);
   const [serverDown, setServerDown] = useState(false);
   const [shopSearchMessage, setShopSearchMessage] = useState("");
@@ -54,6 +55,7 @@ export const ShopsBrowsePage = () => {
         <FilterShopsForm
           setShops={setShops}
           setShopSearchMessage={setShopSearchMessage}
+          searchScrollRef={searchScrollRef}
         />
       ) : (
         <></>
@@ -65,7 +67,9 @@ export const ShopsBrowsePage = () => {
           <></>
         )}
       </div>
-      {shops ? <MapBox shops={shops} /> : <></>}
+      <div className="shops__mapbox-container" ref={searchScrollRef}>
+        {shops ? <MapBox shops={shops} /> : <></>}
+      </div>
       <div className="shops__refresh-shops-container">
         <span className="shops__button" onClick={fetchShops}>
           Refresh Shops
