@@ -77,6 +77,7 @@ export const LoginPage = ({ setIsLoggedIn, setUser, isLoggedIn }) => {
               name="email"
               id="email"
               onChange={handleChange}
+              placeholder="Add your email address here"
               className="login__form-input"
             />
           </div>
@@ -89,6 +90,7 @@ export const LoginPage = ({ setIsLoggedIn, setUser, isLoggedIn }) => {
               name="password"
               id="password"
               onChange={handleChange}
+              placeholder="Add your password here"
               className="login__form-input"
             />
           </div>

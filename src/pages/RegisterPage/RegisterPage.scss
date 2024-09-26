@@ -59,6 +59,10 @@
     }
   }
 
+  &__label {
+    max-width: 5rem;
+  }
+
   &__input-container {
     @include form-features.input-container;
   }

@@ -22,9 +22,22 @@ export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const retypedPassword = event.target[3].value;
 
-    if (!formData.email || !formData.password || !formData.name) {
+    if (
+      !formData.email ||
+      !formData.password ||
+      !formData.name ||
+      !retypedPassword
+    ) {
       setErrorMessage("Please make sure all form fields are filled in.");
+      return;
+    }
+
+    if (formData.password !== retypedPassword) {
+      setErrorMessage(
+        `Your passwords don't match, ${formData.name}. Please retype them and try again`
+      );
       return;
     }
 
@@ -92,6 +105,7 @@ export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
               name="name"
               id="registerName"
               onChange={handleChange}
+              placeholder="Type your name here"
               className="register__input"
             />
           </div>
@@ -106,6 +120,7 @@ export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
               name="email"
               id="registerEmail"
               onChange={handleChange}
+              placeholder="Type your email address here"
               className="register__input"
             />
           </div>
@@ -120,6 +135,24 @@ export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
               name="password"
               id="registerPassword"
               onChange={handleChange}
+              placeholder="Create a new password"
+              className="register__input"
+            />
+          </div>
+        </div>
+        <div className="register__form-fields">
+          <div className="register__input-container">
+            <label
+              className="register__label"
+              htmlFor="registerConfirmPassword"
+            >
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="registerConfirmPassword"
+              placeholder="Retype your new password"
               className="register__input"
             />
           </div>
