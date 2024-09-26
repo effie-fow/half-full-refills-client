@@ -35,10 +35,15 @@ function App() {
   };
 
   const getUserOnLoad = async () => {
-    setUser({ name: "friend", id: 1 });
-    const authToken = localStorage.getItem("authToken");
-    const userData = await getUserData(authToken);
-    setUser({ name: userData.name, id: userData.id });
+    try {
+      setUser({ name: "friend", id: 1 });
+      const authToken = localStorage.getItem("authToken");
+      const userData = await getUserData(authToken);
+      setUser({ name: userData.name, id: userData.id });
+    } catch (error) {
+      setIsLoggedIn(false);
+      setUser(null);
+    }
   };
 
   return (

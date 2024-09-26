@@ -192,6 +192,6 @@ export const getUserData = async (authToken) => {
 
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw new Error();
   }
 };
