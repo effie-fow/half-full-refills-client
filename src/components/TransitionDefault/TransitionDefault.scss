@@ -1,0 +1,72 @@
+@use "../../styles/partials/base/breakpoints";
+@use "../../styles/partials/base/typography";
+@use "../../styles/partials/base/color";
+@use "../../styles/partials/layout/margin";
+@use "../../styles/partials/layout/display";
+@use "../../styles/partials/layout/padding";
+@use "../../styles/partials/styling/button";
+@use "../../styles/partials/animations/newShop";
+
+.transition {
+  margin: 0 auto;
+  margin-bottom: margin.$page-bottom;
+  max-width: display.$desktop-max-width;
+  @include display.flexbox(column, center, center, wrap, 1rem);
+  @include padding.top-bottom(4rem, 3rem);
+  @include padding.sides;
+
+  @include breakpoints.large-phone {
+    margin-bottom: 0;
+    margin-top: margin.$page-top;
+    @include padding.top-bottom(4.5rem, 5.5rem);
+  }
+
+  &__animation-container {
+    padding-top: 1rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &__icon {
+    height: 6rem;
+    transform: translateY(120%);
+    animation: 0.6s ease-in 0.5s 1 slideInFromBottom forwards;
+  }
+
+  &__message-container {
+    max-width: 39rem;
+    @include display.flexbox(column, center, center, wrap);
+    @include padding.top-bottom(0, 1rem);
+
+    @include breakpoints.tablet {
+      text-align: center;
+    }
+  }
+
+  &__heading {
+    font-weight: 400;
+    font-size: 1.3rem;
+    line-height: 1.4;
+  }
+
+  &__subheading {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: color.$accent;
+    @include padding.top-bottom(1rem, 1rem);
+  }
+
+  &__buttons-container {
+    width: 100%;
+    @include display.flexbox(row, center, center, wrap, 1rem);
+  }
+
+  &__home-button {
+    @include button.button(color.$dark, color.$dark-hover);
+  }
+
+  &__refill-button {
+    @include button.button(color.$accent, color.$accent-hover);
+  }
+}

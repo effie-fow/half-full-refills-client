@@ -1,8 +1,10 @@
 import "./ServerErrorPage.scss";
 import emptyGlassIcon from "../../assets/icons/empty-glass-green.png";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export const ServerErrorPage = () => {
+  useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), []);
+
   return (
     <main className="server-error">
       <img

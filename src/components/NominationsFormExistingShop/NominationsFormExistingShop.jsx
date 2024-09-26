@@ -20,10 +20,10 @@ export const NominationsFormExistingShop = ({ user }) => {
   const [dropDownShops, setDropDownShops] = useState(null);
   const [items, setItems] = useState(null);
   const [currentShop, setCurrentShop] = useState(null);
-  const [shopActivated, setShopActivated] = useState("");
   const [emptyFieldMessage, setEmptyFieldMessage] = useState("");
-  const [thankYouMessage, setThankYouMessage] = useState("");
   const [serverDown, setServerDown] = useState(false);
+  const [activated, setActivated] = useState(false);
+  const [nominated, setNominated] = useState(false);
 
   const fetchNominatedShops = async () => {
     const shopsForDropdown = [];
@@ -114,22 +114,18 @@ export const NominationsFormExistingShop = ({ user }) => {
       await postNominationItems(shopId, nominationData);
       event.target.reset();
 
-      const nominatedShop = await countNominations(shopId, currentShop);
-      if (typeof nominatedShop === "string") {
-        setThankYouMessage(nominatedShop);
-        setTimeout(() => setThankYouMessage(""), 3000);
-      }
+      await countNominations(shopId, currentShop);
 
       const shopDetails = await getSingleShop(shopId);
 
       if (shopDetails.is_active) {
-        setShopActivated(`Yours was the 100th nomination! ${nominatedShop.name} is now active on
-        our website with details on ${nominatedShop.items.length} of its refillables and key details, thanks to you!`);
-        setTimeout(() => {
-          setShopActivated("");
-        }, 6000);
+        setEmptyFieldMessage("");
+        setCurrentShop(null);
+        setActivated(true);
+        return;
       }
 
+      setNominated(true);
       setEmptyFieldMessage("");
       setCurrentShop(null);
       fetchNominatedShops();
@@ -178,11 +174,10 @@ export const NominationsFormExistingShop = ({ user }) => {
       </form>
       <div className="existing-shops-form__message-container">
         <span className="existing-shops-form__form-popup">
-          {shopActivated ? `${shopActivated}` : " "}
-          {thankYouMessage ? `${thankYouMessage}` : ""}
           {emptyFieldMessage ? `${emptyFieldMessage}` : ""}
         </span>
-        {thankYouMessage ? <Navigate to="/shops" /> : <></>}
+        {nominated ? <Navigate to="/nomination-confirm" /> : <></>}
+        {activated ? <Navigate to="/shop-activated" /> : <></>}
       </div>
     </>
   );

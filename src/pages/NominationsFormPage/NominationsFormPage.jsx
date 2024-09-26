@@ -1,7 +1,7 @@
 import "./NominationsFormPage.scss";
 import { NominationsFormExistingShop } from "../../components/NominationsFormExistingShop/NominationsFormExistingShop";
 import { NominationsFormNewShop } from "../../components/NominationsFormNewShop/NominationsFormNewShop";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 
 export const NominationsFormPage = ({ isLoggedIn, user }) => {
@@ -12,6 +12,8 @@ export const NominationsFormPage = ({ isLoggedIn, user }) => {
       ? setFormType("Nominate Existing Shop")
       : setFormType("+ Add New Shop");
   };
+
+  useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), []);
 
   if (!isLoggedIn) {
     return <Navigate to="/login-register" />;

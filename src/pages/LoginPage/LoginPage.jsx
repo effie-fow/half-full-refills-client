@@ -1,16 +1,19 @@
 import "./LoginPage.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getUserData, loginUser } from "../../utils/apiUtils";
 import { Button } from "../../components/Button/Button";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Divider } from "../../components/Divider/Divider";
 
-export const LoginPage = ({ setIsLoggedIn, setUser, isLoggedIn }) => {
+export const LoginPage = ({ setIsLoggedIn, setUser, isLoggedIn, user }) => {
   const [message, setMessage] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), []);
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -36,13 +39,13 @@ export const LoginPage = ({ setIsLoggedIn, setUser, isLoggedIn }) => {
       localStorage.setItem("authToken", data.authToken);
       setIsLoggedIn(true);
       setUser({ name: userData.name, id: userData.id });
-      setMessage(`Welcome back, ${userData.name}! You are now logged in.`);
       event.target[0].value = "";
       event.target[1].value = "";
       setFormData({
         email: "",
         password: "",
       });
+      setLoginSuccess(true);
     } catch (error) {
       setMessage(
         "Either your email address or password is unrecognised, please try again."
@@ -103,6 +106,7 @@ export const LoginPage = ({ setIsLoggedIn, setUser, isLoggedIn }) => {
         </div>
         <Divider />
       </form>
+      {loginSuccess && <Navigate to="/login-success" />}
     </main>
   );
 };

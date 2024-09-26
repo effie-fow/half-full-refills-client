@@ -33,6 +33,7 @@ export const ShopsBrowsePage = () => {
 
   useEffect(() => {
     fetchShops();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   if (!shops) {

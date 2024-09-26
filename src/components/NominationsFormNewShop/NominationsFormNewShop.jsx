@@ -15,6 +15,7 @@ import { getCoordinates } from "../../utils/mapBoxApi";
 import { CheckboxInstructions } from "../CheckboxInstructions/CheckboxInstructions";
 import { FormFieldsInstructions } from "../FormFieldsInstructions/FormFieldsInstructions";
 import { Divider } from "../Divider/Divider";
+import { Navigate } from "react-router-dom";
 
 export const NominationsFormNewShop = ({ user }) => {
   const [nominatedShops, setNominatedShops] = useState(null);
@@ -22,6 +23,7 @@ export const NominationsFormNewShop = ({ user }) => {
   const [emptyInputMessage, setEmptyInputMessage] = useState(null);
   const [missingInput, setMissingInput] = useState(false);
   const [serverDown, setServerDown] = useState(false);
+  const [newShopAdded, setNewShopAdded] = useState(false);
 
   const fetchNominatedShops = async () => {
     try {
@@ -117,6 +119,7 @@ export const NominationsFormNewShop = ({ user }) => {
 
       await postNominationItems(newShopId, nominationData);
       event.target.reset();
+      setNewShopAdded(true);
       await fetchNominatedShops();
     } catch (error) {
       console.error(error);
@@ -194,6 +197,7 @@ export const NominationsFormNewShop = ({ user }) => {
           {missingInput ? `${emptyInputMessage}` : ""}
         </span>
       </div>
+      {newShopAdded ? <Navigate to="/add-shop-success" /> : <></>}
     </form>
   );
 };

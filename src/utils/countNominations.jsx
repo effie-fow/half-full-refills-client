@@ -10,7 +10,7 @@ export const countNominations = async (shopId, shopName) => {
   const nominations = await getNominationsForShop(shopId);
 
   if (nominations.length < 5) {
-    return `Thank you for nominating ${shopName}!`;
+    return;
   }
 
   const nominationIds = nominations.map((nomination) => {
@@ -43,7 +43,7 @@ export const countNominations = async (shopId, shopName) => {
   });
 
   if (!finalItems.length) {
-    return `Thank you for nominating ${shopName}!`;
+    return;
   }
 
   for (let finalItemId of finalItems) {

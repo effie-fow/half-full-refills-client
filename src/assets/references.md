@@ -26,6 +26,9 @@
 - <a href="https://www.svgrepo.com/svg/489491/information-circle">Info</a>
 - <a href="https://www.svgrepo.com/svg/173438/signpost">Signpost</a>
 - <a href="https://www.svgrepo.com/svg/196372/ghost">Ghost</a>
+- <a href="https://www.svgrepo.com/svg/188897/shop-store">Shop</a>
+- <a href="https://www.svgrepo.com/svg/477351/vote-2">Vote/Nominate</a>
+- <a href="https://www.svgrepo.com/svg/79611/welcome">Welcome</a>
 
 Images:
 

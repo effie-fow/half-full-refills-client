@@ -1,8 +1,11 @@
 import "./NotFoundPage.scss";
 import signpostIcon from "../../assets/icons/signpost-green.svg";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export const NotFoundPage = () => {
+  useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), []);
+
   return (
     <main className="not-found">
       <img

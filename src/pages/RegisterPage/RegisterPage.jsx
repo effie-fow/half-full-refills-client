@@ -4,7 +4,7 @@ import refillingConditionerImg from "../../assets/images/photos/refill-condition
 import { checkUserExists, registerUser } from "../../utils/apiUtils";
 import { useState } from "react";
 import { Button } from "../../components/Button/Button";
-import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { Divider } from "../../components/Divider/Divider";
 
 export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
@@ -173,15 +173,7 @@ export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
         </div>
         <div className="register__message-container">
           {errorMessage && <p className="register__message">{errorMessage}</p>}
-          {success && (
-            <p className="register__message">
-              Welcome to the club!{" "}
-              <Link className="register__text-link" to="/login">
-                Please login here
-              </Link>{" "}
-              to continue.
-            </p>
-          )}
+          {success && <Navigate to="/welcome" />}
         </div>
         <Divider />
       </form>

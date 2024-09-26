@@ -14,6 +14,11 @@ import { LoginRequiredPage } from "./pages/LoginRequiredPage/LoginRequiredPage";
 import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { getUserData } from "./utils/apiUtils";
+import { NewShopAddedPage } from "./pages/TransitionPages/NewShopAddedPage/NewShopAddedPage";
+import { NominationSuccessfulPage } from "./pages/TransitionPages/NominationSuccessfulPage/NominationSuccessfulPage";
+import { ShopActivatedPage } from "./pages/TransitionPages/ShopActivatedPage/ShopActivatedPage";
+import { RegisteredWelcomePage } from "./pages/TransitionPages/RegisteredWelcomePage/RegisteredWelcomePage";
+import { LoginSuccessPage } from "./pages/TransitionPages/LoginSuccessPage/LoginSuccessPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -51,12 +56,12 @@ function App() {
       <Header handleLogout={handleLogout} isLoggedIn={isLoggedIn} />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/shops" element={<ShopsBrowsePage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route
           path="/nominate"
           element={<NominationsFormPage isLoggedIn={isLoggedIn} user={user} />}
         />
-        <Route path="/shops" element={<ShopsBrowsePage />} />
-        <Route path="/about" element={<AboutPage />} />
         <Route
           path="/register"
           element={
@@ -74,9 +79,27 @@ function App() {
               setIsLoggedIn={setIsLoggedIn}
               setUser={setUser}
               isLoggedIn={isLoggedIn}
+              user={user}
             />
           }
         />
+        <Route
+          path="/add-shop-success"
+          element={<NewShopAddedPage user={user} />}
+        />
+        <Route
+          path="/nomination-confirm"
+          element={<NominationSuccessfulPage user={user} />}
+        />
+        <Route
+          path="/shop-activated"
+          element={<ShopActivatedPage user={user} />}
+        />
+        <Route
+          path="/login-success"
+          element={<LoginSuccessPage user={user} />}
+        />
+        <Route path="/welcome" element={<RegisteredWelcomePage />} />
         <Route path="/login-register" element={<LoginRequiredPage />} />
         <Route path="/*" element={<NotFoundPage />} />
         <Route path="/500" element={<ServerErrorPage />} />
