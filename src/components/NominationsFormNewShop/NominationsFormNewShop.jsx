@@ -9,6 +9,7 @@ import {
   getAllItems,
   postNominationItems,
   postNewShop,
+  checkShopExists,
 } from "../../utils/apiUtils";
 import { getCoordinates } from "../../utils/mapBoxApi";
 import { CheckboxInstructions } from "../CheckboxInstructions/CheckboxInstructions";
@@ -70,6 +71,20 @@ export const NominationsFormNewShop = ({ user }) => {
 
     try {
       const { street_number, street_name, city } = newShop;
+
+      const shopAlreadyExists = await checkShopExists(
+        street_number,
+        street_name,
+        city
+      );
+
+      if (shopAlreadyExists) {
+        setMissingInput(true);
+        setEmptyInputMessage(
+          `Someone has already registered a shop at ${street_number} ${street_name} in ${city}. Have a look on our Refill page or click 'Nominate Existing Shop' above to check it out!`
+        );
+        return;
+      }
 
       const coordinates = await getCoordinates(
         street_number,

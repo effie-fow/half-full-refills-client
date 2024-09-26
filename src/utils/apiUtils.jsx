@@ -215,3 +215,27 @@ export const checkUserExists = async (emailAddress) => {
     throw new Error();
   }
 };
+
+export const checkShopExists = async (streetNumber, streetName, city) => {
+  try {
+    const response = await axios.get(`${apiUrl}/shops/find/address`, {
+      headers: {
+        streetnumber: streetNumber,
+        streetname: streetName,
+        city: city,
+      },
+    });
+
+    const message = response.data.message;
+
+    if (message === "New shop enabled.") {
+      return false;
+    }
+
+    if (message === "Shop already exists.") {
+      return true;
+    }
+  } catch (error) {
+    throw new Error();
+  }
+};
