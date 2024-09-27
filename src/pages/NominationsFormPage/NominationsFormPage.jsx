@@ -3,9 +3,11 @@ import { NominationsFormExistingShop } from "../../components/NominationsFormExi
 import { NominationsFormNewShop } from "../../components/NominationsFormNewShop/NominationsFormNewShop";
 import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
+import { Loader } from "../../components/Loader/Loader";
 
 export const NominationsFormPage = ({ isLoggedIn, user }) => {
   const [formType, setFormType] = useState("+ Add New Shop");
+  const [redirect, setRedirect] = useState(false);
 
   const handleFormType = () => {
     formType === "+ Add New Shop"
@@ -13,10 +15,22 @@ export const NominationsFormPage = ({ isLoggedIn, user }) => {
       : setFormType("+ Add New Shop");
   };
 
-  useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), []);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setTimeout(() => {
+      if (!isLoggedIn) {
+        setRedirect(true);
+      }
+    }, 3000);
+  }, []);
 
   if (!isLoggedIn) {
-    return <Navigate to="/login-register" />;
+    return (
+      <div className="nominations-page__loader-redirect">
+        <Loader />
+        {redirect ? <Navigate to="/login-register" /> : <></>}
+      </div>
+    );
   }
 
   return (
