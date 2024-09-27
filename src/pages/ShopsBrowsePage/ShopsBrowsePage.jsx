@@ -5,6 +5,7 @@ import { getActiveShops } from "../../utils/apiUtils";
 import { FilterShopsForm } from "../../components/FilterShopsForm/FilterShopsForm";
 import { ShopsIntro } from "../../components/ShopsIntro/ShopsIntro";
 import { Navigate } from "react-router-dom";
+import { Loader } from "../../components/Loader/Loader";
 
 export const ShopsBrowsePage = () => {
   const searchScrollRef = useRef();
@@ -44,7 +45,7 @@ export const ShopsBrowsePage = () => {
   }
 
   if (!shops) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (

@@ -14,6 +14,7 @@ import {
   getSingleShop,
   getNominationsForShop,
 } from "../../utils/apiUtils";
+import { Loader } from "../Loader/Loader";
 
 export const NominationsFormExistingShop = ({ user }) => {
   const [nominatedShops, setNominatedShops] = useState(null);
@@ -141,7 +142,7 @@ export const NominationsFormExistingShop = ({ user }) => {
   }, []);
 
   if (!dropDownShops || !nominatedShops || !items) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (serverDown) {

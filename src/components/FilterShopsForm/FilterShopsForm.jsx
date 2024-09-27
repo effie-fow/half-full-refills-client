@@ -12,6 +12,7 @@ import { ItemCheckbox } from "../ItemCheckbox/ItemCheckbox";
 import { CheckboxInstructions } from "../CheckboxInstructions/CheckboxInstructions";
 import { Divider } from "../Divider/Divider";
 import { Navigate } from "react-router-dom";
+import { Loader } from "../Loader/Loader";
 
 export const FilterShopsForm = ({
   setShops,
@@ -152,7 +153,7 @@ export const FilterShopsForm = ({
   }, []);
 
   if (!items) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (serverDown) {

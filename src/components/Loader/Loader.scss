@@ -1,0 +1,35 @@
+@use "../../styles/partials/base/color";
+@use "../../styles/partials/layout/display";
+
+.loader {
+  width: 100%;
+  height: 20rem;
+  @include display.flexbox(row, center, center, wrap);
+
+  &__glass {
+    width: 4rem;
+    border-radius: 4px;
+    height: 5.125rem;
+    position: relative;
+    margin: 2.5rem;
+    border: 0.4rem solid color.$primary;
+    border-top: 0.2rem solid transparent;
+    transform: perspective(7rem) rotateX(-20deg);
+    animation: 7s linear 1s alternate infinite refill;
+  }
+}
+
+@keyframes refill {
+  0% {
+    box-shadow: inset 0 0 color.$primary;
+  }
+  90% {
+    box-shadow: inset 0 -4.4rem color.$primary;
+  }
+  95% {
+    box-shadow: inset 0 -4.3rem color.$primary;
+  }
+  100% {
+    box-shadow: inset 0 -4.4rem color.$primary;
+  }
+}

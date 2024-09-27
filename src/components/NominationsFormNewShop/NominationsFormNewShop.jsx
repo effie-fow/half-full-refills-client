@@ -16,6 +16,7 @@ import { CheckboxInstructions } from "../CheckboxInstructions/CheckboxInstructio
 import { FormFieldsInstructions } from "../FormFieldsInstructions/FormFieldsInstructions";
 import { Divider } from "../Divider/Divider";
 import { Navigate } from "react-router-dom";
+import { Loader } from "../Loader/Loader";
 
 export const NominationsFormNewShop = ({ user }) => {
   const [nominatedShops, setNominatedShops] = useState(null);
@@ -132,7 +133,7 @@ export const NominationsFormNewShop = ({ user }) => {
   }, []);
 
   if (!nominatedShops || !items) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (serverDown) {

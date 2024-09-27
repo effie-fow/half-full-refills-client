@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import shopIcon from "../../../assets/icons/shop-green.svg";
 import { TransitionDefault } from "../../../components/TransitionDefault/TransitionDefault";
+import { Loader } from "../../../components/Loader/Loader";
 
 export const NewShopAddedPage = ({ user }) => {
   useEffect(() => window.scrollTo(0, 0), []);
 
   if (!user) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   return (

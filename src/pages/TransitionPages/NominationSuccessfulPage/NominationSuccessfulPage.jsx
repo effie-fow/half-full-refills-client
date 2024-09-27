@@ -1,4 +1,5 @@
 import voteIcon from "../../../assets/icons/vote-green.svg";
+import { Loader } from "../../../components/Loader/Loader";
 import { TransitionDefault } from "../../../components/TransitionDefault/TransitionDefault";
 import { useEffect } from "react";
 
@@ -6,7 +7,7 @@ export const NominationSuccessfulPage = ({ user }) => {
   useEffect(() => window.scrollTo(0, 0), []);
 
   if (!user) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   return (

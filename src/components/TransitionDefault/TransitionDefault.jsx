@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
 import "./TransitionDefault.scss";
+import { Link } from "react-router-dom";
+import { Loader } from "../Loader/Loader";
 
 export const TransitionDefault = ({
   user,
@@ -13,7 +14,7 @@ export const TransitionDefault = ({
   buttonTwoText,
 }) => {
   if (!user) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   return (
