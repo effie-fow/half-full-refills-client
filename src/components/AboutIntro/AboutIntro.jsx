@@ -19,7 +19,7 @@ export const AboutIntro = () => {
       </span>
       <h2 className="about-intro__section-heading">Why we exist</h2>
       <p className="about-intro__page-description">
-        Articulate well by{" "}
+        Articulated well by{" "}
         <a
           target="blank"
           href="https://shoplocaluk.org/reasons-why/"

@@ -75,8 +75,14 @@ export const MapBox = ({ shops }) => {
           )
           .addTo(mapRef.current);
 
+        mapRef.current.flyTo({
+          center: newUserCoordinates,
+          zoom: initialZoom,
+        });
+
         setInitialCenter(newUserCoordinates);
         setCenter(newUserCoordinates);
+        setZoom(initialZoom);
       });
     }
 
