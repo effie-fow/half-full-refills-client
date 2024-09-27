@@ -10,11 +10,14 @@ export const MapBox = ({ shops }) => {
   const mapRef = useRef();
   const mapContainerRef = useRef();
   const mapScrollToRef = useRef();
-  const initialCenter = [-0.11427566747321748, 50.8170309602071];
-  const initialZoom = 13;
+  const initialZoom = 14;
+
+  const [initialCenter, setInitialCenter] = useState([
+    -0.11427566747321748, 50.8170309602071,
+  ]);
 
   const [center, setCenter] = useState(initialCenter);
-  const [zoom, setZoom] = useState(initialZoom);
+  const [zoom, setZoom] = useState(1);
 
   if (typeof shops === "string") {
     return <Navigate to="/500" />;
@@ -35,14 +38,6 @@ export const MapBox = ({ shops }) => {
       zoom: zoom,
     });
 
-    mapRef.current.on("move", () => {
-      const mapCenter = mapRef.current.getCenter();
-      const mapZoom = mapRef.current.getZoom();
-
-      setCenter([mapCenter.lng, mapCenter.lat]);
-      setZoom(mapZoom);
-    });
-
     shops.forEach((shop) => {
       new mapboxgl.Marker({
         color: "#1d6b22",
@@ -59,6 +54,41 @@ export const MapBox = ({ shops }) => {
         )
         .addTo(mapRef.current);
     });
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const newUserCoordinates = [
+          position.coords.longitude,
+          position.coords.latitude,
+        ];
+
+        new mapboxgl.Marker({
+          color: "#fb8a62",
+          id: "marker",
+          coordinates: newUserCoordinates,
+        })
+          .setLngLat(newUserCoordinates)
+          .setPopup(
+            new mapboxgl.Popup({ offset: 25 }).setHTML(
+              `<p class="map__pop-up-name">You are here</p>`
+            )
+          )
+          .addTo(mapRef.current);
+
+        setInitialCenter(newUserCoordinates);
+        setCenter(newUserCoordinates);
+      });
+    }
+
+    mapRef.current.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+        showUserHeading: true,
+      })
+    );
 
     mapRef.current.on("click", (e) => {
       setCenter(e.lngLat);
@@ -87,7 +117,7 @@ export const MapBox = ({ shops }) => {
 
   const handleTravel = (coordinates) => {
     setCenter(coordinates);
-    setZoom(12);
+    setZoom(initialZoom);
     mapRef.current.flyTo({ center: coordinates, zoom: 16 });
     mapScrollToRef.current.scrollIntoView({ behavior: "smooth" });
   };
