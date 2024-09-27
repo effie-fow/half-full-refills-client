@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { getActiveShops } from "../../utils/apiUtils";
 import { FilterShopsForm } from "../../components/FilterShopsForm/FilterShopsForm";
 import { ShopsIntro } from "../../components/ShopsIntro/ShopsIntro";
+import { Navigate } from "react-router-dom";
 
 export const ShopsBrowsePage = () => {
   const searchScrollRef = useRef();
@@ -19,8 +20,9 @@ export const ShopsBrowsePage = () => {
       const activeShops = await getActiveShops();
       setShops(activeShops);
     } catch (error) {
-      console.error(error);
       setServerDown(true);
+      console.error(error);
+      console.log(serverDown);
     }
   };
 
@@ -37,12 +39,12 @@ export const ShopsBrowsePage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  if (!shops) {
-    return <div>Loading...</div>;
-  }
-
   if (serverDown) {
     return <Navigate to="/500" />;
+  }
+
+  if (!shops) {
+    return <div>Loading...</div>;
   }
 
   return (

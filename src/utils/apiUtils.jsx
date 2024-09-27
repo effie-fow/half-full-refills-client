@@ -16,7 +16,7 @@ export const getActiveShops = async () => {
     const response = await axios.get(`${apiUrl}/shops?is_active=1`);
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw new Error();
   }
 };
 
