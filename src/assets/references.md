@@ -29,6 +29,7 @@
 - <a href="https://www.svgrepo.com/svg/188897/shop-store">Shop</a>
 - <a href="https://www.svgrepo.com/svg/477351/vote-2">Vote/Nominate</a>
 - <a href="https://www.svgrepo.com/svg/79611/welcome">Welcome</a>
+- <a href="https://fonts.google.com/icons?selected=Material+Symbols+Outlined:water_medium:FILL@0;wght@400;GRAD@0;opsz@24&icon.query=glass&icon.size=24&icon.color=%2334863a">Glass</a>
 
 Images:
 
