@@ -85,7 +85,7 @@ export const LoginPage = ({ setIsLoggedIn, setUser, isLoggedIn, user }) => {
           .
         </p>
       </div>
-      <form className="login__form" onSubmit={handleSubmit}>
+      <form noValidate className="login__form" onSubmit={handleSubmit}>
         <div className="login__form-fields">
           <div className="login__input-container">
             <label className="login__form-label" htmlFor="email">

@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import { ItemCheckbox } from "../ItemCheckbox/ItemCheckbox";
 import { Button } from "../Button/Button";
 import { TextInput } from "../TextInput/TextInput";
-import { generateEmptyInputMessage } from "../../utils/formValidators";
+import {
+  generateEmptyInputMessage,
+  inputContainsNumbers,
+} from "../../utils/formValidators";
 import {
   getNominatedShops,
   getAllItems,
@@ -61,6 +64,18 @@ export const NominationsFormNewShop = ({ user }) => {
         setTimeout(() => setMissingInput(false), 3000);
         return;
       }
+    }
+
+    if (
+      inputContainsNumbers(street_name.value) ||
+      inputContainsNumbers(city.value)
+    ) {
+      setEmptyInputMessage(
+        "Only the name, street number and postcode fields can contain numbers."
+      );
+      setMissingInput(true);
+      setTimeout(() => setMissingInput(false), 3000);
+      return;
     }
 
     const newShop = {
@@ -141,7 +156,7 @@ export const NominationsFormNewShop = ({ user }) => {
   }
 
   return (
-    <form className="new-shops-form" onSubmit={handleSubmit}>
+    <form noValidate className="new-shops-form" onSubmit={handleSubmit}>
       <fieldset className="new-shops-form__shop-details">
         <FormFieldsInstructions />
         <TextInput

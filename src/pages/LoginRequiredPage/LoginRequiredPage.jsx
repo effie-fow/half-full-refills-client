@@ -10,7 +10,7 @@ export const LoginRequiredPage = () => {
     <TransitionDefault
       user="friend"
       icon={ghostIcon}
-      topLine="Woah, who goes there?"
+      topLine="Whoa, who goes there?"
       tagLine="Please login or register in order to nominate."
       details=""
       buttonOneLink="/login"

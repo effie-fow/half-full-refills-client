@@ -13,6 +13,7 @@ import { CheckboxInstructions } from "../CheckboxInstructions/CheckboxInstructio
 import { Divider } from "../Divider/Divider";
 import { Navigate } from "react-router-dom";
 import { Loader } from "../Loader/Loader";
+import { inputContainsNumbers } from "../../utils/formValidators";
 
 export const FilterShopsForm = ({
   setShops,
@@ -41,6 +42,14 @@ export const FilterShopsForm = ({
         `If you're looking for something specific, we can only help you if you tell us what it is...`
       );
       setTimeout(() => setShopSearchMessage(""), 6000);
+    }
+
+    if (inputContainsNumbers(searchedCity)) {
+      setShopSearchMessage(
+        "Whoops, there seem to be some numbers in the 'Search by City' field."
+      );
+      setTimeout(() => setShopSearchMessage(""), 6000);
+      return;
     }
 
     try {

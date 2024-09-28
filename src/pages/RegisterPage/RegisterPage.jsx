@@ -6,6 +6,11 @@ import { useState } from "react";
 import { Button } from "../../components/Button/Button";
 import { Navigate } from "react-router-dom";
 import { Divider } from "../../components/Divider/Divider";
+import {
+  emailIsValid,
+  inputContainsNumbers,
+  passwordIsStrong,
+} from "../../utils/formValidators";
 
 export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
   const [errorMessage, setErrorMessage] = useState(false);
@@ -34,9 +39,32 @@ export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
       return;
     }
 
+    if (inputContainsNumbers(formData.name)) {
+      setErrorMessage(
+        "Please remove any numbers from the name field and try again."
+      );
+      return;
+    }
+
+    if (!emailIsValid(formData.email)) {
+      setErrorMessage(
+        "Your email address is invalid. Valid emails may look like this: example@email.com"
+      );
+      return;
+    }
+
     if (formData.password !== retypedPassword) {
       setErrorMessage(
         `Your passwords don't match, ${formData.name}. Please retype them and try again`
+      );
+      return;
+    }
+
+    if (!passwordIsStrong(formData.password)) {
+      console.log(formData.password);
+
+      setErrorMessage(
+        "Your password isn't quite strong enough. Please read the instructions above and try again."
       );
       return;
     }
@@ -108,7 +136,7 @@ export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
           clicking the 'Register' button.
         </p>
       </div>
-      <form className="register__form" onSubmit={handleSubmit}>
+      <form noValidate className="register__form" onSubmit={handleSubmit}>
         <div className="register__form-fields">
           <div className="register__input-container">
             <label htmlFor="registerName" className="register__label">
@@ -141,6 +169,11 @@ export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
         </div>
         <div className="register__form-fields">
           <div className="register__input-container">
+            <p className="register__instructions">
+              Please ensure you use a strong password. Passwords must contain at
+              least one lowercase and uppercase English letter, one digit and
+              one special character, and must be at least 8 characters in length
+            </p>
             <label className="register__label" htmlFor="registerPassword">
               Password
             </label>
