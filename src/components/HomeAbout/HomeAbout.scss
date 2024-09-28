@@ -8,6 +8,7 @@
   background-color: color.$primary;
   color: white;
   width: 100%;
+  margin-bottom: -0.1rem;
   @include display.flexbox(row, center, center, wrap);
 
   &__sub-container {
