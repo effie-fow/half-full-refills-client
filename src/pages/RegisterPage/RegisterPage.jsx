@@ -61,8 +61,6 @@ export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
     }
 
     if (!passwordIsStrong(formData.password)) {
-      console.log(formData.password);
-
       setErrorMessage(
         "Your password isn't quite strong enough. Please read the instructions above and try again."
       );
