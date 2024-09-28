@@ -16,7 +16,8 @@ export const getCoordinates = async (streetNumber, streetName, city) => {
     const coordinates = response.data.features[0].geometry.coordinates;
     return coordinates;
   } catch (error) {
-    console.error(error);
-    return <Navigate to="/500" />;
+    throw new Error(
+      `Error whilst fetching coordinates from MapBox Geocoding API. ${error}`
+    );
   }
 };

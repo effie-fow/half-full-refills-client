@@ -47,11 +47,27 @@ export const LoginPage = ({ setIsLoggedIn, setUser, isLoggedIn, user }) => {
       });
       setLoginSuccess(true);
     } catch (error) {
+      if (error.message === "AxiosError: Request failed with status code 403") {
+        setMessage(
+          "Either your email address or password is unrecognised, please try again."
+        );
+        setIsLoggedIn(false);
+        localStorage.removeItem("authToken");
+        return;
+      }
+
+      if (error.message === "AxiosError: Request failed with status code 400") {
+        setMessage("Please provide a valid email and password.");
+        setIsLoggedIn(false);
+        localStorage.removeItem("authToken");
+        return;
+      }
+
       setMessage(
-        "Either your email address or password is unrecognised, please try again."
+        "Sorry, we're having issues with our server right now, please try again later."
       );
-      setIsLoggedIn(false);
-      localStorage.removeItem("authToken");
+
+      console.error(error);
     }
   };
 

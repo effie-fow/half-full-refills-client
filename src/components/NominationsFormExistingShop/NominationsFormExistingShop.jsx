@@ -45,8 +45,8 @@ export const NominationsFormExistingShop = ({ user }) => {
         });
       });
     } catch (error) {
-      console.error(error);
       setServerDown(true);
+      console.error(error);
     }
     setDropDownShops(shopsForDropdown);
     setNominatedShops(shopsNameId);
@@ -57,8 +57,8 @@ export const NominationsFormExistingShop = ({ user }) => {
       const itemsData = await getAllItems();
       setItems(itemsData);
     } catch (error) {
-      console.error(error);
       setServerDown(true);
+      console.error(error);
     }
   };
 
@@ -131,8 +131,8 @@ export const NominationsFormExistingShop = ({ user }) => {
       setCurrentShop(null);
       fetchNominatedShops();
     } catch (error) {
-      console.error(error);
       setServerDown(true);
+      console.error(error);
     }
   };
 

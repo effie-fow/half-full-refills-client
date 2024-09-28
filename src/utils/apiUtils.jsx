@@ -7,7 +7,7 @@ export const getNominatedShops = async () => {
     const response = await axios.get(`${apiUrl}/shops?is_active=0`);
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw new Error(`Error whilst fetching nominated shops. ${error}`);
   }
 };
 
@@ -16,7 +16,7 @@ export const getActiveShops = async () => {
     const response = await axios.get(`${apiUrl}/shops?is_active=1`);
     return response.data;
   } catch (error) {
-    throw new Error();
+    throw new Error(`Error whilst fetching shops. ${error}`);
   }
 };
 
@@ -27,7 +27,7 @@ export const getShopsByCity = async (city) => {
     );
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw new Error(`Error whilst fetching shops by city. ${error}`);
   }
 };
 
@@ -35,13 +35,11 @@ export const getShopsByItems = async (items, strictSearch) => {
   const matchType = strictSearch ? "exact" : "partial";
 
   if (typeof items !== "object") {
-    console.error("Items query must be an array of items.");
-    return;
+    throw new Error(`Items query must be an array of items.`);
   }
 
   if (!items.length) {
-    console.error("There are no items to query by");
-    return;
+    throw new Error(`There are no items to query by.`);
   }
 
   const formattedItems = items.join(",");
@@ -52,7 +50,7 @@ export const getShopsByItems = async (items, strictSearch) => {
     );
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw new Error(`Error whilst fetching shops by item. ${error}`);
   }
 };
 
@@ -60,13 +58,11 @@ export const getShopsByCityAndItems = async (city, items, strictSearch) => {
   const matchType = strictSearch ? "exact" : "partial";
 
   if (typeof items !== "object") {
-    console.error("Items query must be an array of items.");
-    return;
+    throw new Error(`Items query must be an array of items.`);
   }
 
   if (!items.length) {
-    console.error("There are no items to query by");
-    return;
+    throw new Error(`There are no items to query by.`);
   }
 
   const formattedItems = items.join(",");
@@ -77,7 +73,7 @@ export const getShopsByCityAndItems = async (city, items, strictSearch) => {
     );
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw new Error(`Error whilst fetching shops by item and city. ${error}`);
   }
 };
 
@@ -86,7 +82,7 @@ export const getSingleShop = async (id) => {
     const response = await axios.get(`${apiUrl}/shops/${id}`);
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw new Error(`Error whilst fetching shop. ${error}`);
   }
 };
 
@@ -95,7 +91,7 @@ export const getAllItems = async () => {
     const response = await axios.get(`${apiUrl}/items`);
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw new Error(`Error whilst fetching items. ${error}`);
   }
 };
 
@@ -107,7 +103,7 @@ export const postNominationItems = async (shopId, nominationData) => {
     );
     return response;
   } catch (error) {
-    console.error(error);
+    throw new Error(`Error whilst posting nomination items. ${error}`);
   }
 };
 
@@ -116,7 +112,7 @@ export const postNewShop = async (newShop) => {
     const response = await axios.post(`${apiUrl}/shops`, newShop);
     return response;
   } catch (error) {
-    console.error(error);
+    throw new Error(`Error whilst posting new shop to database. ${error}`);
   }
 };
 
@@ -125,7 +121,7 @@ export const getNominationsForShop = async (shopId) => {
     const response = await axios.get(`${apiUrl}/nominations/shops/${shopId}`);
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw new Error(`Error whilst fetching nomination data. ${error}`);
   }
 };
 
@@ -136,7 +132,9 @@ export const getUniqueNominationsShops = async (nominationId) => {
     );
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw new Error(
+      `Error whilst fetching unique shop's nomination data. ${error}`
+    );
   }
 };
 
@@ -145,7 +143,7 @@ export const postShopItem = async (shopItemObject) => {
     const response = await axios.post(`${apiUrl}/shops/items`, shopItemObject);
     return response;
   } catch (error) {
-    console.error(error);
+    throw new Error(`Error whilst posting new shop item. ${error}`);
   }
 };
 
@@ -157,7 +155,7 @@ export const editShopDetails = async (shopId, detailsToUpdate) => {
     );
     return response;
   } catch (error) {
-    console.error(error);
+    throw new Error(`Error whilst patching new shop information. ${error}`);
   }
 };
 
@@ -165,7 +163,7 @@ export const registerUser = async (userDetails) => {
   try {
     await axios.post(`${apiUrl}/users/register`, userDetails);
   } catch (error) {
-    console.error(error);
+    throw new Error(`Error whilst registering new user. ${error}`);
   }
 };
 
@@ -175,10 +173,10 @@ export const loginUser = async (userLoginDetails) => {
       `${apiUrl}/users/login`,
       userLoginDetails
     );
+
     return data;
   } catch (error) {
-    console.error(error);
-    throw new Error();
+    throw new Error(error);
   }
 };
 
@@ -192,7 +190,7 @@ export const getUserData = async (authToken) => {
 
     return response.data;
   } catch (error) {
-    throw new Error();
+    throw new Error(`Error whilst fetching user data. ${error}`);
   }
 };
 
@@ -212,7 +210,9 @@ export const checkUserExists = async (emailAddress) => {
       return true;
     }
   } catch (error) {
-    throw new Error();
+    throw new Error(
+      `Error whilst verifying if email address matches any on our database. ${error}`
+    );
   }
 };
 
@@ -236,6 +236,8 @@ export const checkShopExists = async (streetNumber, streetName, city) => {
       return true;
     }
   } catch (error) {
-    throw new Error();
+    throw new Error(
+      `Error whilst checking if new shop matches existing shop on our database. ${error}`
+    );
   }
 };

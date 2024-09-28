@@ -23,7 +23,6 @@ export const ShopsBrowsePage = () => {
     } catch (error) {
       setServerDown(true);
       console.error(error);
-      console.log(serverDown);
     }
   };
 

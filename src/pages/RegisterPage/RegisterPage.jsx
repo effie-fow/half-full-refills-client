@@ -65,7 +65,10 @@ export const RegisterPage = ({ handleLogout, isLoggedIn }) => {
       event.target[2].value = "";
       event.target[3].value = "";
     } catch (error) {
-      setErrorMessage(error);
+      setErrorMessage(
+        `Sorry, we're having issues registering new users at the moment. Please try again later.`
+      );
+      console.error(error);
     }
   };
 

@@ -31,8 +31,8 @@ export const NominationsFormNewShop = ({ user }) => {
       const nominatedShopsData = await getNominatedShops();
       setNominatedShops(nominatedShopsData);
     } catch (error) {
-      console.error(error);
       setServerDown(true);
+      console.error(error);
     }
   };
 
@@ -41,8 +41,8 @@ export const NominationsFormNewShop = ({ user }) => {
       const itemsData = await getAllItems();
       setItems(itemsData);
     } catch (error) {
-      console.error(error);
       setServerDown(true);
+      console.error(error);
     }
   };
 
@@ -122,8 +122,8 @@ export const NominationsFormNewShop = ({ user }) => {
       event.target.reset();
       await fetchNominatedShops();
     } catch (error) {
-      console.error(error);
       setServerDown(true);
+      console.error(error);
     }
   };
 

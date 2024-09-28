@@ -123,8 +123,8 @@ export const FilterShopsForm = ({
 
       event.target.reset();
     } catch (error) {
-      console.error(error);
       setServerDown(true);
+      console.error(error);
     }
   };
 
@@ -133,8 +133,8 @@ export const FilterShopsForm = ({
       const activeShops = await getShopsByCity(city);
       return activeShops;
     } catch (error) {
-      console.error(error);
       setServerDown(true);
+      console.error(error);
     }
   };
 
@@ -143,8 +143,8 @@ export const FilterShopsForm = ({
       const itemsData = await getAllItems();
       setItems(itemsData);
     } catch (error) {
-      console.error(error);
       setServerDown(true);
+      console.error(error);
     }
   };
 
