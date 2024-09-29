@@ -1,4 +1,6 @@
-_Please note, this is a work in progress. The site is being created as a 'Capstone' project, as part of a BrainStation Software Engineering Bootcamp. [The Server Repo can be found here](https://github.com/effie-fow/half-full-refills-server)_
+**Please note**, this is a work in progress. The site is being created as a 'Capstone' project, as part of a BrainStation Software Engineering Bootcamp. [The Server Repo can be found here](https://github.com/effie-fow/half-full-refills-server).
+
+To view the live web application, please visit [www.halffullrefills.com](https://www.halffullrefills.com).
 
 # Half-Full Refills
 
@@ -34,27 +36,31 @@ Know of a local shop that aligns with our values? Fill in our short nomination f
 - As a user, I want to know if the shop is well stocked with vegan/plant-based products
 - As a user, I want to know the shop has been approved by other users
 
+- As a logged in user, I want to be able to 'nominate' shops which are already on the system
 - As a logged in user, I want to be able to 'nominate' my local shop which isn't already on the system
-- As a logged in user, I want to be able to leave an overall rating for listings I nominate
 
 ## Implementation
 
 ### Tech Stack
 
-- React JS
-- Node JS
+- React
+- Node
+- Express
 - MySQL
 - Client libraries:
   - react
   - react-router
   - axios
-  - express
   - knex
+  - uuid
   - sass
+  - react-dropdown
 
-### APIs
+### External APIs
 
-- Leaflet OR MapBox
+- MapBox
+  - GL JS - _for map display_
+  - Geocoding - _for finding coordinates_
 
 ### Sitemap
 
@@ -72,11 +78,6 @@ Know of a local shop that aligns with our values? Fill in our short nomination f
 
     ![A diagram dispalying the user journey and questions to be asked on the shops landing page](./src/assets/images/references/shops-page-plan.png)
 
-- Shop (Individual)
-  - Each shop can have it's own page with full details including items available for refill, other information, map, address, link to website,
-  - Each shop page should show:
-    - Half Full Rating (from Empty to Full)
-    - Information not accurate? Let us know \*
 - Nominate a Shop
 
   - Form page where logged in users can fill in essential details about the shop they're nominating
@@ -107,8 +108,7 @@ There will be three core data tables with varying relationships, two intermediat
      - street name
      - city
      - postcode
-     - latitude
-     - longitude
+     - coordinates
      - is active
 
    - **Relationships**
@@ -123,6 +123,7 @@ There will be three core data tables with varying relationships, two intermediat
 
      - id (PK)
      - name
+     - formatted name
 
    - **Relationships**
      - shops - N:N via intermediate
@@ -150,9 +151,9 @@ There will be three core data tables with varying relationships, two intermediat
    - **Columns**
 
      - id (PK)
-     - nominations_id (FK)
      - name
      - email
+     - password (protected by JWT token / bcrypt)
 
    - **Relationships**
      - nominations - 1:N
@@ -163,11 +164,13 @@ There will be three core data tables with varying relationships, two intermediat
 
 ### Endpoints
 
+**Please note:** The Half-Full API requires an API key with all requests from the client. If cloning the repo and making your own instance of the database, this must be added to a .env file in both client/server. The key must be added to all requests as a query parameter. Example URL: http://localhost:3030/shops?api_key=your-api-key.
+
 - **GET - /shops**
 
-  Full list of shops
+  Full list of shops - without query params, returns list of all shops on DB.
 
-  https://halffullapi.com/shops?api_key={apiKey}
+  https://halffullapi.com/shops
 
   - Params
 
@@ -235,7 +238,7 @@ There will be three core data tables with varying relationships, two intermediat
 
   Full shop object
 
-  https://halffullapi.com/shop/:id?api_key={apiKey}
+  https://halffullapi.com/shops/:id
 
   - Returns
 
@@ -247,7 +250,10 @@ There will be three core data tables with varying relationships, two intermediat
 
   Edit single property of object
 
-  https://halffullapi.com/shop/:id?api_key={apiKey}
+  - Requires req body:
+    - Object containing properties to edit (e.g {is_active: 1})
+
+  https://halffullapi.com/shops/:id
 
   - Returns
 
@@ -255,37 +261,189 @@ There will be three core data tables with varying relationships, two intermediat
 
 ---
 
-- **PUT - /shops/:id/nominations**
+- **POST - /shops**
 
-  Add a nomination for a shop whilst specifying the items it sells. This creates a new nomination row in the _nominations_ table and a new nomination/item row for each item of the nomination in the _nominations_items_ table.
+  Add new shop
 
-  https://halffullapi.com/shop/:id/nominations
+  - Requires req body:
+    - Object containing all shop properties (name, street_number, street_name, city, postcode, coordinates, is active)
 
-  - Expected body:
-
-    - {
-      - users_id: 7,
-      - items: ["pasta", "rice", "step_free", "vegan", "oat_milk", "salt_pepper"]
-    - }
+  https://halffullapi.com/shops
 
   - Returns
 
-    - {
-      - shopName: "Name",
-      - nominatedItems: ["pasta", "rice", "step_free", "vegan", "oat_milk", "salt_pepper"]
-    - }
+    _New shop object including shop ID_
 
 ---
 
 - **DELETE - /shops/:id**
 
-  Delete specified shop from database
+Delete specified shop from database
 
-  https://halffullapi.com/shop/:id?api_key={apiKey}
+https://halffullapi.com/shops/:id
+
+- Returns
+
+  _No object (204 No Content)_
+
+---
+
+- **GET - /items**
+
+  Full list of items.
+
+  https://halffullapi.com/items
 
   - Returns
 
-    _No object_
+    _Full list of items_
+
+---
+
+- **GET - /nominations/shops/:id/items**
+
+  Full list of items associated with a unique nominations (i.e. Nomination with ID of 2 has five unique items associated with it. The array returned from '/nominations/shops/2/items' will have five objects in it, one for each item).
+
+  https://halffullapi.com/nominations/shops/:id/items
+
+  - Returns
+
+    _List of all item IDs associated with the nomination ID_
+
+---
+
+- **GET - /nominations/shops/:id**
+
+  Full list of nominations associated with a unique shop, specified by shop ID as path param.
+
+  https://halffullapi.com/nominations/shops/:id
+
+  - Returns
+
+    _List of nomination objects, each associated with a shop's ID and a user's ID_
+
+---
+
+- **POST - /nominations/shops/:id**
+
+  Add a unique nomination for a shop.
+
+  - Requires req body:
+    - Object containing two properties:
+      - users_id: (unique user's ID)
+      - items: (array of items selected when nominating shop)
+
+  https://halffullapi.com/nominations/shops/:id
+
+  - Returns
+
+    _Object with the name of the shop nominated, and the full list of items selected_
+
+---
+
+- **DELETE - /nominations/shops/:id**
+
+  Delete single nomination by unique nomination ID.
+
+  https://halffullapi.com/nominations/shops/:id
+
+  - Returns
+
+    _No object (204 No Content)_
+
+---
+
+- **POST - /shops/items**
+
+  Delete single nomination by unique nomination ID.
+
+  - Requires req body:
+  - Object containing two properties:
+    - shops_id: (unique user's ID)
+    - items_id: (unique item's ID)
+
+  https://halffullapi.com/nominations/shops/:id
+
+  - Returns
+
+    _Shops/Items ID object with '201 Created' status code_
+
+---
+
+- **POST - /users/register**
+
+  Add (register) a new user.
+
+  - Requires req body:
+    - Object containing three properties (name, email, password)
+
+  https://halffullapi.com/users/register
+
+  - Returns
+
+    _A 'success:true' object if registration is successful_
+
+---
+
+- **POST - /users/login**
+
+  'Logs in' user, creating Auth Token.
+
+  - Requires req body:
+    - Object containing two properties (user's email and password)
+
+  https://halffullapi.com/users/login
+
+  - Returns
+
+    _Object with a single 'authToken' property (expires after 24h)_
+
+---
+
+- **GET - /users/profile**
+
+  'Logs in' user, creating Auth Token.
+
+  - Requires header:
+    - Object containing 'authorisation' property with value 'Bearer {authToken}'
+
+  https://halffullapi.com/users/profile
+
+  - Returns
+
+    _Object with key user details (unique id, name, email address)_
+
+---
+
+- **GET - /users/confirm**
+
+  Confirms whether user already exists on DB.
+
+  - Requires header:
+    - Object containing 'email' property with value of user's email address
+
+  https://halffullapi.com/users/confirm
+
+  - Returns
+
+    _Object with message "New user enabled" if no user exists with matching address or "User already exists." if matching address is found_
+
+---
+
+- **GET - /shops/find/address**
+
+  Confirms whether shop already exists on DB.
+
+  - Requires header:
+    - Object containing 'streetNumber', 'streetName' and 'city' properties.
+
+  https://halffullapi.com/find/address
+
+  - Returns
+
+    _Object with message "New shop enabled." if no shop exists with matching address or "Shop already exists." if matching address is found_
+
+---
 
 ## Roadmap
 
@@ -307,6 +465,26 @@ There will be three core data tables with varying relationships, two intermediat
 
 ## Future Implementations
 
-- _"Information not accurate? Let us know"_ \* an additional innacurate data form would be useful in future iterations
-- _"Verified as accurate by {number} Half Full users"_ - it would be nice to have a 'verify as accurate' button for logged-in users where they can mark the shop's details as accurate after visiting.
-- Embedded Google Reviews
+- **Social Elements**
+
+  Having developed the core functionality of the app, next steps would be to build more social features for users. There would be a broad range of possibilities, but recommended starting place would be a central 'profile' page for users where they can view their nominations, shop ratings, 'friends', and reviews.
+
+  ***
+
+- **"Information not accurate? Let us know"**
+
+  An additional innacurate data form would be useful in future iterations
+
+  ***
+
+- **"Verified as accurate by {number} Half Full users"**
+
+  It would be nice to have a 'verify as accurate' button for logged-in users where they can mark listed shops' details as accurate after visiting.
+
+  ***
+
+- **Map Navigation**
+
+  Although the map currently has tracking ability and re-centering to user's current location, with a larger budget, the app could invest in MapBox's paid-for navigation feature to allow users to follow directions to a shop whilst out and about.
+
+---
