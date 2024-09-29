@@ -17,7 +17,7 @@ export const ShopsIntro = () => {
       <p className="shops-intro__page-description">
         If there's a shop you love that you don't see here, please head over to
         our{" "}
-        <Link to="/about" className="shops-intro__text-link">
+        <Link to="/nominate" className="shops-intro__text-link">
           nominations page
         </Link>{" "}
         to tell us about it!
