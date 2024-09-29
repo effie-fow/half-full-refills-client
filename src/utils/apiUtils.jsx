@@ -1,10 +1,13 @@
 import axios from "axios";
 
 const apiUrl = import.meta.env.VITE_API_URL;
+const apiKey = import.meta.env.VITE_API_KEY;
 
 export const getNominatedShops = async () => {
   try {
-    const response = await axios.get(`${apiUrl}/shops?is_active=0`);
+    const response = await axios.get(
+      `${apiUrl}/shops?is_active=0&api_key=${apiKey}`
+    );
     return response.data;
   } catch (error) {
     throw new Error(`Error whilst fetching nominated shops. ${error}`);
@@ -13,7 +16,9 @@ export const getNominatedShops = async () => {
 
 export const getActiveShops = async () => {
   try {
-    const response = await axios.get(`${apiUrl}/shops?is_active=1`);
+    const response = await axios.get(
+      `${apiUrl}/shops?is_active=1&api_key=${apiKey}`
+    );
     return response.data;
   } catch (error) {
     throw new Error(`Error whilst fetching shops. ${error}`);
@@ -23,7 +28,7 @@ export const getActiveShops = async () => {
 export const getShopsByCity = async (city) => {
   try {
     const response = await axios.get(
-      `${apiUrl}/shops?is_active=1&city=${city}`
+      `${apiUrl}/shops?is_active=1&city=${city}&api_key=${apiKey}`
     );
     return response.data;
   } catch (error) {
@@ -46,7 +51,7 @@ export const getShopsByItems = async (items, strictSearch) => {
 
   try {
     const response = await axios.get(
-      `${apiUrl}/shops?is_active=1&items=${formattedItems}&match_type=${matchType}`
+      `${apiUrl}/shops?is_active=1&items=${formattedItems}&match_type=${matchType}&api_key=${apiKey}`
     );
     return response.data;
   } catch (error) {
@@ -69,7 +74,7 @@ export const getShopsByCityAndItems = async (city, items, strictSearch) => {
 
   try {
     const response = await axios.get(
-      `${apiUrl}/shops?is_active=1&city=${city}&items=${formattedItems}&match_type=${matchType}`
+      `${apiUrl}/shops?is_active=1&city=${city}&items=${formattedItems}&match_type=${matchType}&api_key=${apiKey}`
     );
     return response.data;
   } catch (error) {
@@ -79,7 +84,7 @@ export const getShopsByCityAndItems = async (city, items, strictSearch) => {
 
 export const getSingleShop = async (id) => {
   try {
-    const response = await axios.get(`${apiUrl}/shops/${id}`);
+    const response = await axios.get(`${apiUrl}/shops/${id}?api_key=${apiKey}`);
     return response.data;
   } catch (error) {
     throw new Error(`Error whilst fetching shop. ${error}`);
@@ -88,7 +93,7 @@ export const getSingleShop = async (id) => {
 
 export const getAllItems = async () => {
   try {
-    const response = await axios.get(`${apiUrl}/items`);
+    const response = await axios.get(`${apiUrl}/items?api_key=${apiKey}`);
     return response.data;
   } catch (error) {
     throw new Error(`Error whilst fetching items. ${error}`);
@@ -98,7 +103,7 @@ export const getAllItems = async () => {
 export const postNominationItems = async (shopId, nominationData) => {
   try {
     const response = await axios.post(
-      `${apiUrl}/nominations/shops/${shopId}`,
+      `${apiUrl}/nominations/shops/${shopId}?api_key=${apiKey}`,
       nominationData
     );
     return response;
@@ -109,7 +114,10 @@ export const postNominationItems = async (shopId, nominationData) => {
 
 export const postNewShop = async (newShop) => {
   try {
-    const response = await axios.post(`${apiUrl}/shops`, newShop);
+    const response = await axios.post(
+      `${apiUrl}/shops?api_key=${apiKey}`,
+      newShop
+    );
     return response;
   } catch (error) {
     throw new Error(`Error whilst posting new shop to database. ${error}`);
@@ -118,7 +126,9 @@ export const postNewShop = async (newShop) => {
 
 export const getNominationsForShop = async (shopId) => {
   try {
-    const response = await axios.get(`${apiUrl}/nominations/shops/${shopId}`);
+    const response = await axios.get(
+      `${apiUrl}/nominations/shops/${shopId}?api_key=${apiKey}`
+    );
     return response.data;
   } catch (error) {
     throw new Error(`Error whilst fetching nomination data. ${error}`);
@@ -128,7 +138,7 @@ export const getNominationsForShop = async (shopId) => {
 export const getUniqueNominationsShops = async (nominationId) => {
   try {
     const response = await axios.get(
-      `${apiUrl}/nominations/shops/${nominationId}/items`
+      `${apiUrl}/nominations/shops/${nominationId}/items?api_key=${apiKey}`
     );
     return response.data;
   } catch (error) {
@@ -140,7 +150,10 @@ export const getUniqueNominationsShops = async (nominationId) => {
 
 export const postShopItem = async (shopItemObject) => {
   try {
-    const response = await axios.post(`${apiUrl}/shops/items`, shopItemObject);
+    const response = await axios.post(
+      `${apiUrl}/shops/items?api_key=${apiKey}`,
+      shopItemObject
+    );
     return response;
   } catch (error) {
     throw new Error(`Error whilst posting new shop item. ${error}`);
@@ -150,7 +163,7 @@ export const postShopItem = async (shopItemObject) => {
 export const editShopDetails = async (shopId, detailsToUpdate) => {
   try {
     const response = await axios.patch(
-      `${apiUrl}/shops/${shopId}`,
+      `${apiUrl}/shops/${shopId}?api_key=${apiKey}`,
       detailsToUpdate
     );
     return response;
@@ -161,7 +174,7 @@ export const editShopDetails = async (shopId, detailsToUpdate) => {
 
 export const registerUser = async (userDetails) => {
   try {
-    await axios.post(`${apiUrl}/users/register`, userDetails);
+    await axios.post(`${apiUrl}/users/register?api_key=${apiKey}`, userDetails);
   } catch (error) {
     throw new Error(`Error whilst registering new user. ${error}`);
   }
@@ -170,7 +183,7 @@ export const registerUser = async (userDetails) => {
 export const loginUser = async (userLoginDetails) => {
   try {
     const { data } = await axios.post(
-      `${apiUrl}/users/login`,
+      `${apiUrl}/users/login?api_key=${apiKey}`,
       userLoginDetails
     );
 
@@ -182,11 +195,14 @@ export const loginUser = async (userLoginDetails) => {
 
 export const getUserData = async (authToken) => {
   try {
-    const response = await axios.get(`${apiUrl}/users/profile`, {
-      headers: {
-        authorisation: `Bearer ${authToken}`,
-      },
-    });
+    const response = await axios.get(
+      `${apiUrl}/users/profile?api_key=${apiKey}`,
+      {
+        headers: {
+          authorisation: `Bearer ${authToken}`,
+        },
+      }
+    );
 
     return response.data;
   } catch (error) {
@@ -196,9 +212,12 @@ export const getUserData = async (authToken) => {
 
 export const checkUserExists = async (emailAddress) => {
   try {
-    const response = await axios.get(`${apiUrl}/users/confirm`, {
-      headers: { email: emailAddress },
-    });
+    const response = await axios.get(
+      `${apiUrl}/users/confirm?api_key=${apiKey}`,
+      {
+        headers: { email: emailAddress },
+      }
+    );
 
     const message = response.data.message;
 
@@ -218,13 +237,16 @@ export const checkUserExists = async (emailAddress) => {
 
 export const checkShopExists = async (streetNumber, streetName, city) => {
   try {
-    const response = await axios.get(`${apiUrl}/shops/find/address`, {
-      headers: {
-        streetnumber: streetNumber,
-        streetname: streetName,
-        city: city,
-      },
-    });
+    const response = await axios.get(
+      `${apiUrl}/shops/find/address?api_key=${apiKey}`,
+      {
+        headers: {
+          streetnumber: streetNumber,
+          streetname: streetName,
+          city: city,
+        },
+      }
+    );
 
     const message = response.data.message;
 
