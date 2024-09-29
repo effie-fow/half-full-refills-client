@@ -63,6 +63,10 @@
   }
 
   &__loader-redirect {
-    margin-top: 3rem;
+    @include breakpoints.desktop {
+      min-height: 80vh;
+      margin-top: 3rem;
+      @include display.flexbox(row, center, center, wrap);
+    }
   }
 }

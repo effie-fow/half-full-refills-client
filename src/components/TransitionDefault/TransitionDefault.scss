@@ -21,6 +21,10 @@
     @include padding.top-bottom(4.5rem, 5.5rem);
   }
 
+  @include breakpoints.desktop {
+    min-height: 80vh;
+  }
+
   &__animation-container {
     padding-top: 1rem;
     overflow: hidden;
